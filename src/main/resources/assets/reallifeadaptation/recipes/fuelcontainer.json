@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " C ",
+        "GCG",
+        " G "
+    ],
+    "key": {
+        "G": {
+            "item": "reallifeadaptation:rubberbucket"
+        },
+        "C": {
+            "item": "reallifeadaptation:compressedcoal"
+        }
+    },
+    "result": {
+        "item": "reallifeadaptation:fuelcontainer",
+        "count": 1
+    }
+}

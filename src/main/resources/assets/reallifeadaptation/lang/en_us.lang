@@ -1,0 +1,16 @@
+tile.electric_light_block.name=Electric Light Block
+item.fuelcontainer.name=Fuel Container
+item.rubber.name=Rubber
+item.rubberbucket.name=Rubber Bucket
+tile.street_light_block.name=Street Light Block
+tile.compressedcoal.name=Compressed Coal
+tile.BlockRafenerie.name=Rafenerie
+item.oilbucket.name=Oil Bucket
+tile.day_night_block.name=Day Night Light Block
+
+//Potions
+effect.beerpotion=Beer Potion
+potion.effect.beerpotion=Potion of Beer Potion
+splash_potion.effect.beerpotion=Splash Potion of Beer Potion
+lingering_potion.effect.beerpotion=Lingering Potion of Beer Potion
+tipped_arrow.effect.beerpotion=Arrow of Beer Potion

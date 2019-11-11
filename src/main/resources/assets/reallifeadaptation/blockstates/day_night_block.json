@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": [
+      {"model": "reallifeadaptation:day_night_block"}
+    ]
+  }
+}

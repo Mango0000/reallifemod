@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": [
+      {"model": "reallifeadaptation:street_light_block"}
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "down": "reallifeadaptation:blocks/electric_light_block_off",
+    "up": "reallifeadaptation:blocks/electric_light_block_on",
+    "north": "reallifeadaptation:blocks/electric_light_block_off",
+    "east": "reallifeadaptation:blocks/electric_light_block_off",
+    "south": "reallifeadaptation:blocks/electric_light_block_off",
+    "west": "reallifeadaptation:blocks/electric_light_block_off"
+  }
+}
