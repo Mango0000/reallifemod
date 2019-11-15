@@ -1,6 +1,7 @@
 package at.kaindorf.reallifeadaptation.proxy;
 
 
+import at.kaindorf.reallifeadaptation.Machines.MachineIronFurnace;
 import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
 import at.kaindorf.reallifeadaptation.blocks.*;
 import at.kaindorf.reallifeadaptation.items.FuelItem;
@@ -61,6 +62,7 @@ public class CommonProxy {
     public static final Block traffic_light_lamp = new BlockTrafficLight("traffic_light_block",Material.ROCK).setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
     public static final Block orange_traffic_light_lamp = new BlockTrafficLight("orange_traffic_light_block",Material.ROCK);
     public static final Block red_traffic_light_lamp = new BlockTrafficLight("red_traffic_light_block",Material.ROCK);
+    public static final Block machine_iron_furnace = new MachineIronFurnace(false, "machine_iron_furnace");
     public void preInit(FMLPreInitializationEvent e) {
 
     }
@@ -84,7 +86,8 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        event.getRegistry().registerAll(electricstreetlight, streetlightblock, compressedcoal, rafenerie_block, day_night_block, traffic_light_lamp, lit_streetlightblock);
+        event.getRegistry().registerAll(electricstreetlight, streetlightblock, compressedcoal,
+                rafenerie_block, day_night_block, traffic_light_lamp, lit_streetlightblock, machine_iron_furnace);
     }
 
 
@@ -97,6 +100,7 @@ public class CommonProxy {
         event.getRegistry().registerAll(new ItemBlock(day_night_block).setRegistryName(day_night_block.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(traffic_light_lamp).setRegistryName(traffic_light_lamp.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(lit_streetlightblock).setRegistryName(lit_streetlightblock.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(machine_iron_furnace).setRegistryName(machine_iron_furnace.getRegistryName()));
     }
 
     @SubscribeEvent
@@ -117,6 +121,7 @@ public class CommonProxy {
         registerRender(Item.getItemFromBlock(rafenerie_block));
         registerRender(Item.getItemFromBlock(day_night_block));
         registerRender(Item.getItemFromBlock(traffic_light_lamp));
+        registerRender(Item.getItemFromBlock(machine_iron_furnace));
 
     }
 
