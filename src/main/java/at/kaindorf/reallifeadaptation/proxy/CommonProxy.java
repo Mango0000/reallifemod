@@ -80,7 +80,7 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        event.getRegistry().registerAll(electricstreetlight, streetlightblock, compressedcoal, rafenerie_block, day_night_block);
+        event.getRegistry().registerAll(electricstreetlight, streetlightblock, compressedcoal, rafenerie_block, day_night_block,lit_streetlightblock);
     }
 
 
@@ -91,6 +91,7 @@ public class CommonProxy {
         event.getRegistry().registerAll(new ItemBlock(compressedcoal).setRegistryName(compressedcoal.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(rafenerie_block).setRegistryName(rafenerie_block.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(day_night_block).setRegistryName(day_night_block.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(lit_streetlightblock).setRegistryName(lit_streetlightblock.getRegistryName()));
     }
 
     @SubscribeEvent
@@ -104,6 +105,7 @@ public class CommonProxy {
         registerRender(rubber);
         registerRender(rubberbucket);
         registerRender(oilbucket);
+        registerRender(Item.getItemFromBlock(lit_streetlightblock));
         registerRender(Item.getItemFromBlock(electricstreetlight));
         registerRender(Item.getItemFromBlock(streetlightblock));
         registerRender(Item.getItemFromBlock(compressedcoal));
