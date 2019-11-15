@@ -1,4 +1,4 @@
 package at.kaindorf.reallifeadaptation.Machines;
 
-public class MachineSägewerk {
+public class MachineSawmill {
 }
