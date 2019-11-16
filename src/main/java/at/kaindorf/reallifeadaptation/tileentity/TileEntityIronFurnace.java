@@ -8,12 +8,21 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ContainerFurnace;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.inventory.SlotFurnaceFuel;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBoat;
+import net.minecraft.item.ItemDoor;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -25,7 +34,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityIronFurnace extends TileEntityLockable implements ITickable, ISidedInventory{
+public class TileEntityIronFurnace extends TileEntityLockable implements ITickable, ISidedInventory
+{
     private static final int[] SLOTS_TOP = new int[] {0};
     private static final int[] SLOTS_BOTTOM = new int[] {2, 1};
     private static final int[] SLOTS_SIDES = new int[] {1};
@@ -129,40 +139,40 @@ public class TileEntityIronFurnace extends TileEntityLockable implements ITickab
 
     public static void registerFixesFurnace(DataFixer fixer)
     {
-        fixer.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists(TileEntityFurnace.class, new String[] {"Items"}));
+        fixer.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists(TileEntityIronFurnace.class, new String[] {"Items"}));
     }
 
-    public void readFromNBT(NBTTagCompound compound)
-    {
-        super.readFromNBT(compound);
-        this.furnaceItemStacks = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
-        ItemStackHelper.loadAllItems(compound, this.furnaceItemStacks);
-        this.furnaceBurnTime = compound.getInteger("BurnTime");
-        this.cookTime = compound.getInteger("CookTime");
-        this.totalCookTime = compound.getInteger("CookTimeTotal");
-        this.currentItemBurnTime = getItemBurnTime(this.furnaceItemStacks.get(1));
-
-        if (compound.hasKey("CustomName", 8))
-        {
-            this.furnaceCustomName = compound.getString("CustomName");
-        }
-    }
-
-    public NBTTagCompound writeToNBT(NBTTagCompound compound)
-    {
-        super.writeToNBT(compound);
-        compound.setInteger("BurnTime", (short)this.furnaceBurnTime);
-        compound.setInteger("CookTime", (short)this.cookTime);
-        compound.setInteger("CookTimeTotal", (short)this.totalCookTime);
-        ItemStackHelper.saveAllItems(compound, this.furnaceItemStacks);
-
-        if (this.hasCustomName())
-        {
-            compound.setString("CustomName", this.furnaceCustomName);
-        }
-
-        return compound;
-    }
+//    public void readFromNBT(NBTTagCompound compound)
+//    {
+//        super.readFromNBT(compound);
+//        this.furnaceItemStacks = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
+//        ItemStackHelper.loadAllItems(compound, this.furnaceItemStacks);
+//        this.furnaceBurnTime = compound.getInteger("BurnTime");
+//        this.cookTime = compound.getInteger("CookTime");
+//        this.totalCookTime = compound.getInteger("CookTimeTotal");
+//        this.currentItemBurnTime = getItemBurnTime(this.furnaceItemStacks.get(1));
+//
+//        if (compound.hasKey("CustomName", 8))
+//        {
+//            this.furnaceCustomName = compound.getString("CustomName");
+//        }
+//    }
+//
+//    public NBTTagCompound writeToNBT(NBTTagCompound compound)
+//    {
+//        super.writeToNBT(compound);
+//        compound.setInteger("BurnTime", (short)this.furnaceBurnTime);
+//        compound.setInteger("CookTime", (short)this.cookTime);
+//        compound.setInteger("CookTimeTotal", (short)this.totalCookTime);
+//        ItemStackHelper.saveAllItems(compound, this.furnaceItemStacks);
+//
+//        if (this.hasCustomName())
+//        {
+//            compound.setString("CustomName", this.furnaceCustomName);
+//        }
+//
+//        return compound;
+//    }
 
     /**
      * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended.
@@ -253,7 +263,7 @@ public class TileEntityIronFurnace extends TileEntityLockable implements ITickab
             if (flag != this.isBurning())
             {
                 flag1 = true;
-                BlockFurnace.setState(this.isBurning(), this.world, this.pos);
+                MachineIronFurnace.setState(this.isBurning(), this.world, this.pos);
             }
         }
 
