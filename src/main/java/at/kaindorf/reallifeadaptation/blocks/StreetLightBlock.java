@@ -58,55 +58,15 @@ public class StreetLightBlock extends BlockBase {//implements ITileEntityProvide
         return true;
     }
 
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+    @Override
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
-        worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
-
-        if (stack.hasDisplayName())
-        {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
-
-            if (tileentity instanceof TileEntityFurnace)
-            {
-                ((TileEntityFurnace)tileentity).setCustomInventoryName(stack.getDisplayName());
-            }
-        }
-    }
-
-    public EnumBlockRenderType getRenderType(IBlockState state)
-    {
-        return EnumBlockRenderType.MODEL;
-    }
-
-    public IBlockState getStateFromMeta(int meta)
-    {
-        EnumFacing enumfacing = EnumFacing.getFront(meta);
-
-        if (enumfacing.getAxis() == EnumFacing.Axis.Y)
-        {
-            enumfacing = EnumFacing.NORTH;
-        }
-
-        return this.getDefaultState().withProperty(FACING, enumfacing);
+        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 
     public int getMetaFromState(IBlockState state)
     {
         return ((EnumFacing)state.getValue(FACING)).getIndex();
-    }
-
-    public IBlockState withRotation(IBlockState state, Rotation rot)
-    {
-        return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
-    }
-
-    /**
-     * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
-    public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
-    {
-        return state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
     }
 
     protected BlockStateContainer createBlockState()
