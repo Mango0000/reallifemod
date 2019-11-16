@@ -1,5 +1,6 @@
 package at.kaindorf.reallifeadaptation.Machines;
 
+import at.kaindorf.reallifeadaptation.tileentity.TileEntityIronFurnace;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -151,7 +152,7 @@ public class MachineIronFurnace extends MachineBase {
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEntityFurnace();
+        return new TileEntityIronFurnace();
     }
 
     /**

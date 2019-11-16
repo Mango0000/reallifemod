@@ -1,8 +1,8 @@
 {
   "variants": {
-    "facing=north": { "model": "machine_iron_furnace" },
-    "facing=south": { "model": "machine_iron_furnace", "y": 180 },
-    "facing=west":  { "model": "machine_iron_furnace", "y": 270 },
-    "facing=east":  { "model": "machine_iron_furnace", "y": 90 }
+    "facing=north": { "model": "reallifeadaptation:machine_iron_furnace" },
+    "facing=south": { "model": "reallifeadaptation:machine_iron_furnace", "y": 180 },
+    "facing=west":  { "model": "reallifeadaptation:machine_iron_furnace", "y": 270 },
+    "facing=east":  { "model": "reallifeadaptation:machine_iron_furnace", "y": 90 }
   }
 }
