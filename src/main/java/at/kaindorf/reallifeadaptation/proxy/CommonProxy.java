@@ -59,7 +59,8 @@ public class CommonProxy {
     public static final PotionType BEER_POTION = new PotionType("beerpotion", new PotionEffect[]{new PotionEffect(BEER_POTION_EFFECT, 2400)}).setRegistryName("beerpotion");
     public static final PotionType LONG_BEER_POTION = new PotionType("beerpotion", new PotionEffect[]{new PotionEffect(BEER_POTION_EFFECT, 4000)}).setRegistryName("long_beerpotion");
 
-    public static final Block traffic_light_lamp = new BlockTrafficLight("traffic_light_block",Material.ROCK).setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+    public static final Block traffic_light_block =
+            new BlockTrafficLight("traffic_light_block", Material.ROCK);
     public static final Block orange_traffic_light_lamp = new BlockTrafficLight("orange_traffic_light_block",Material.ROCK);
     public static final Block red_traffic_light_lamp = new BlockTrafficLight("red_traffic_light_block",Material.ROCK);
     public static final Block machine_iron_furnace = new MachineIronFurnace(false, "machine_iron_furnace");
@@ -87,7 +88,7 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().registerAll(electricstreetlight, streetlightblock, compressedcoal,
-                rafenerie_block, day_night_block, traffic_light_lamp, lit_streetlightblock, machine_iron_furnace);
+                rafenerie_block, day_night_block, traffic_light_block, lit_streetlightblock, machine_iron_furnace);
     }
 
 
@@ -98,7 +99,7 @@ public class CommonProxy {
         event.getRegistry().registerAll(new ItemBlock(compressedcoal).setRegistryName(compressedcoal.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(rafenerie_block).setRegistryName(rafenerie_block.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(day_night_block).setRegistryName(day_night_block.getRegistryName()));
-        event.getRegistry().registerAll(new ItemBlock(traffic_light_lamp).setRegistryName(traffic_light_lamp.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(traffic_light_block).setRegistryName(traffic_light_block.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(lit_streetlightblock).setRegistryName(lit_streetlightblock.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(machine_iron_furnace).setRegistryName(machine_iron_furnace.getRegistryName()));
     }
@@ -120,7 +121,7 @@ public class CommonProxy {
         registerRender(Item.getItemFromBlock(compressedcoal));
         registerRender(Item.getItemFromBlock(rafenerie_block));
         registerRender(Item.getItemFromBlock(day_night_block));
-        registerRender(Item.getItemFromBlock(traffic_light_lamp));
+        registerRender(Item.getItemFromBlock(traffic_light_block));
         registerRender(Item.getItemFromBlock(machine_iron_furnace));
 
     }

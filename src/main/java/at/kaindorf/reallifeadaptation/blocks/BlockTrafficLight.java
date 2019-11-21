@@ -21,39 +21,41 @@ import javax.annotation.Nullable;
 
 public class BlockTrafficLight extends BlockBase implements ITileEntityProvider {
 
-    public static final PropertyDirection FACING = PropertyDirection.create("facing");
+    //public static final PropertyDirection FACING = PropertyDirection.create("facing");
 
     public BlockTrafficLight(String name, Material materialIn) {
         super(name, materialIn);
-        setDefaultState(getDefaultState().withProperty(FACING, EnumFacing.UP));
+        //setDefaultState(getDefaultState().withProperty(FACING, EnumFacing.UP));
+//        setRegistryName(name);
+//        setUnlocalizedName(name);
         GameRegistry.registerTileEntity(TileEntityRafenerie.class, new ResourceLocation(RealLifeAdaptation.MODID,
                 "rafenerie_block"));
     }
-    @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return getDefaultState().withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer));
-    }
+//    @Override
+//    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+//        return getDefaultState().withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer));
+//    }
 
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getIndex();
-    }
+//    @Override
+//    public int getMetaFromState(IBlockState state) {
+//        return state.getValue(FACING).getIndex();
+//    }
+//
+//    @Override
+//    protected BlockStateContainer createBlockState() {
+//        return new BlockStateContainer(this, FACING);
+//    }
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING);
-    }
-
-    @Override
-    public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EnumFacing side) {
-        if(side == null){
-            return true;
-        }
-        if(state.getValue(FACING) != side.getOpposite()){
-            return true;
-        }
-        return false;
-    }
+//    @Override
+//    public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable EnumFacing side) {
+//        if(side == null){
+//            return true;
+//        }
+//        if(state.getValue(FACING) != side.getOpposite()){
+//            return true;
+//        }
+//        return false;
+//    }
 
     @Nullable
     @Override

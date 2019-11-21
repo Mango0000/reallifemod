@@ -24,27 +24,27 @@ public class TileEntityTrafficLight extends TileEntity implements ITickable {
 
     @Override
     public void update() {
-        if(world.isRemote){
-            return;
-        }
-
-        if(counter < 100){
-            counter ++;
-            return;
-        }
-        counter = 0;
-        if(!RedsonteUtil.isPowered(world, pos)){
-            return;
-        }
-
-        IBlockState ourState = world.getBlockState(pos);
-        EnumFacing facing = ourState.getValue(BlockRafenerie.FACING);
-        BlockPos destinationPos = pos.offset(facing);
-
-        TileEntity tileent = world.getTileEntity(destinationPos);
-        if(tileent == null){
-            return;
-        }
+//        if(world.isRemote){
+//            return;
+//        }
+//
+//        if(counter < 100){
+//            counter ++;
+//            return;
+//        }
+//        counter = 0;
+//        if(!RedsonteUtil.isPowered(world, pos)){
+//            return;
+//        }
+//
+//        IBlockState ourState = world.getBlockState(pos);
+//        EnumFacing facing = ourState.getValue(BlockRafenerie.FACING);
+//        BlockPos destinationPos = pos.offset(facing);
+//
+//        TileEntity tileent = world.getTileEntity(destinationPos);
+//        if(tileent == null){
+//            return;
+//        }
 //        if (!world.isDaytime()) {
 //            world.setBlockState(pos, CommonProxy.lit_day_night_block.getDefaultState());
 //        } else {
