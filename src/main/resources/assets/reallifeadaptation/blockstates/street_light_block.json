@@ -1,7 +1,8 @@
 {
   "variants": {
-    "normal": [
-      {"model": "reallifeadaptation:street_light_block"}
-    ]
+    "facing=north": { "model": "reallifeadaptation:lamp", "y": 180 },
+    "facing=south": { "model": "reallifeadaptation:lamp"},
+    "facing=west":  { "model": "reallifeadaptation:lamp", "y": 90 },
+    "facing=east":  { "model": "reallifeadaptation:lamp", "y": 270 }
   }
 }

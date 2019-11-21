@@ -1,7 +1,10 @@
 {
   "variants": {
-    "normal": [
-      {"model": "reallifeadaptation:rafenerie_block"}
-    ]
+    "facing=north": { "model": "reallifeadaptation:rafenerie_block", "x": 90 },
+    "facing=south": { "model": "reallifeadaptation:rafenerie_block", "x": 90,"y": 180 },
+    "facing=west":  { "model": "reallifeadaptation:rafenerie_block", "x": 90,"y": 270 },
+    "facing=east":  { "model": "reallifeadaptation:rafenerie_block", "x": 90,"y": 90 },
+    "facing=up":  { "model": "reallifeadaptation:rafenerie_block"},
+    "facing=down":  { "model": "reallifeadaptation:rafenerie_block", "x": 180 }
   }
 }
