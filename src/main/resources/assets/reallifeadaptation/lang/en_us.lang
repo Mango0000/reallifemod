@@ -7,8 +7,8 @@ tile.compressedcoal.name=Compressed Coal
 tile.BlockRafenerie.name=Rafenerie
 item.oilbucket.name=Oil Bucket
 tile.day_night_block.name=Day Night Light Block
-tile.double=double
-
+item.sawmil_blade.name=Sawmil Blade
+tile.sawmi
 //Potions
 effect.beerpotion=Beer Potion
 potion.effect.beerpotion=Potion of Beer Potion

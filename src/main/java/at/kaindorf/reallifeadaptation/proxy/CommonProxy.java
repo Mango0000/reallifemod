@@ -1,14 +1,14 @@
 package at.kaindorf.reallifeadaptation.proxy;
 
 
+import at.kaindorf.reallifeadaptation.Machines.MachineCustomFurnace;
 import at.kaindorf.reallifeadaptation.Machines.MachineIronFurnace;
 import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
 import at.kaindorf.reallifeadaptation.blocks.*;
-import at.kaindorf.reallifeadaptation.items.FuelItem;
-import at.kaindorf.reallifeadaptation.items.ItemOilBucket;
-import at.kaindorf.reallifeadaptation.items.ItemRubber;
-import at.kaindorf.reallifeadaptation.items.ItemRubberBucket;
+import at.kaindorf.reallifeadaptation.items.*;
 import at.kaindorf.reallifeadaptation.potions.BeerPotion;
+import at.kaindorf.reallifeadaptation.tileentity.TileEntityCustomFurnace;
+import at.kaindorf.reallifeadaptation.util.handlers.GuiHandler;
 import com.google.gson.JsonObject;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -23,6 +23,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.potion.PotionType;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -35,10 +36,16 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod.EventBusSubscriber(modid = RealLifeAdaptation.MODID)
 public class CommonProxy {
+
+    @Mod.Instance
+    public static CommonProxy instance;
+
     //    public static Item KEY_GRAY = new KeyItem("graykey");
     public static final Block streetlightblock =
             new StreetLightBlock("street_light_block", Material.ROCK, false);
@@ -64,7 +71,9 @@ public class CommonProxy {
     public static final Block orange_traffic_light_lamp = new BlockTrafficLight("orange_traffic_light_block",Material.ROCK);
     public static final Block red_traffic_light_lamp = new BlockTrafficLight("red_traffic_light_block",Material.ROCK);
     public static final Block machine_iron_furnace = new MachineIronFurnace(false, "machine_iron_furnace");
-    public static final Block doubleblock = new BlockDouble(Material.WOOD, "double");
+    public static final Block CUSTOM_FURNACE = new MachineCustomFurnace("custom_furnace");
+    public static final TileEntity te = new TileEntityCustomFurnace();
+    public static final Item SAWMIL_BLADE = new ItemBlade("sawmil_blade", 4);
     public void preInit(FMLPreInitializationEvent e) {
 
     }
@@ -79,7 +88,10 @@ public class CommonProxy {
         CraftingHelper.register(new ResourceLocation(RealLifeAdaptation.MODID + ":fuelcontainer"),factory);
         CraftingHelper.register(new ResourceLocation(RealLifeAdaptation.MODID + ":compressedcoal"),factory);
         CraftingHelper.register(new ResourceLocation(RealLifeAdaptation.MODID + ":rubberbucket"),factory);
+        CraftingHelper.register(new ResourceLocation(RealLifeAdaptation.MODID + ":sawmil_blade"),factory);
         registerPostion();
+        registerTileEntities();
+        NetworkRegistry.INSTANCE.registerGuiHandler(RealLifeAdaptation.instance, new GuiHandler());
     }
 
     public void postInit(FMLPostInitializationEvent e) {
@@ -89,7 +101,7 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().registerAll(electricstreetlight, streetlightblock, compressedcoal,
-                rafenerie_block, day_night_block, traffic_light_block, lit_streetlightblock, machine_iron_furnace, doubleblock);
+                rafenerie_block, day_night_block, traffic_light_block, lit_streetlightblock, machine_iron_furnace, CUSTOM_FURNACE);
     }
 
 
@@ -103,12 +115,12 @@ public class CommonProxy {
         event.getRegistry().registerAll(new ItemBlock(traffic_light_block).setRegistryName(traffic_light_block.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(lit_streetlightblock).setRegistryName(lit_streetlightblock.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(machine_iron_furnace).setRegistryName(machine_iron_furnace.getRegistryName()));
-        event.getRegistry().registerAll(new ItemBlock(doubleblock).setRegistryName(doubleblock.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(CUSTOM_FURNACE).setRegistryName(CUSTOM_FURNACE.getRegistryName()));
     }
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().registerAll(fuelContainer, rubber, rubberbucket, oilbucket);
+        event.getRegistry().registerAll(fuelContainer, rubber, rubberbucket, oilbucket, SAWMIL_BLADE);
     }
 
     @SubscribeEvent
@@ -117,6 +129,7 @@ public class CommonProxy {
         registerRender(rubber);
         registerRender(rubberbucket);
         registerRender(oilbucket);
+        registerRender(SAWMIL_BLADE);
         registerRender(Item.getItemFromBlock(lit_streetlightblock));
         registerRender(Item.getItemFromBlock(electricstreetlight));
         registerRender(Item.getItemFromBlock(streetlightblock));
@@ -125,7 +138,9 @@ public class CommonProxy {
         registerRender(Item.getItemFromBlock(day_night_block));
         registerRender(Item.getItemFromBlock(traffic_light_block));
         registerRender(Item.getItemFromBlock(machine_iron_furnace));
-        registerRender(Item.getItemFromBlock(doubleblock));
+        registerRender(Item.getItemFromBlock(CUSTOM_FURNACE));
+
+
     }
 
 
@@ -145,8 +160,15 @@ public class CommonProxy {
         ForgeRegistries.POTION_TYPES.register(longPotion);
     }
 
+    public static void registerTileEntities()
+    {
+        GameRegistry.registerTileEntity(TileEntityCustomFurnace.class, new ResourceLocation(RealLifeAdaptation.MODID + ":custom_furnace"));
+    }
+
     private static void registerPotionMixes(){
         PotionHelper.addMix(BEER_POTION, Items.REDSTONE, LONG_BEER_POTION);
         PotionHelper.addMix(PotionTypes.AWKWARD, Items.APPLE, BEER_POTION);
     }
+
+
 }
