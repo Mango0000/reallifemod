@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=upper": { "model": "reallifeadaptation:traffic_light_block"},
+    "half=lower": { "model": "reallifeadaptation:traffic_light_block"}
+  }
+}

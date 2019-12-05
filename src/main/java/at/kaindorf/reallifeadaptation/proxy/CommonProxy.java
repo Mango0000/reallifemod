@@ -64,6 +64,7 @@ public class CommonProxy {
     public static final Block orange_traffic_light_lamp = new BlockTrafficLight("orange_traffic_light_block",Material.ROCK);
     public static final Block red_traffic_light_lamp = new BlockTrafficLight("red_traffic_light_block",Material.ROCK);
     public static final Block machine_iron_furnace = new MachineIronFurnace(false, "machine_iron_furnace");
+    public static final Block doubleblock = new BlockDouble(Material.WOOD, "double");
     public void preInit(FMLPreInitializationEvent e) {
 
     }
@@ -88,7 +89,7 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().registerAll(electricstreetlight, streetlightblock, compressedcoal,
-                rafenerie_block, day_night_block, traffic_light_block, lit_streetlightblock, machine_iron_furnace);
+                rafenerie_block, day_night_block, traffic_light_block, lit_streetlightblock, machine_iron_furnace, doubleblock);
     }
 
 
@@ -102,6 +103,7 @@ public class CommonProxy {
         event.getRegistry().registerAll(new ItemBlock(traffic_light_block).setRegistryName(traffic_light_block.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(lit_streetlightblock).setRegistryName(lit_streetlightblock.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(machine_iron_furnace).setRegistryName(machine_iron_furnace.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(doubleblock).setRegistryName(doubleblock.getRegistryName()));
     }
 
     @SubscribeEvent
@@ -123,7 +125,7 @@ public class CommonProxy {
         registerRender(Item.getItemFromBlock(day_night_block));
         registerRender(Item.getItemFromBlock(traffic_light_block));
         registerRender(Item.getItemFromBlock(machine_iron_furnace));
-
+        registerRender(Item.getItemFromBlock(doubleblock));
     }
 
 
