@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "reallifeadaptation:items/sawmil_blade"
+        "layer0": "reallifeadaptation:items/saw"
     }
 }

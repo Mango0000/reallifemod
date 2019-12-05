@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "reallifeadaptation:blocks/traffic_light_block"
+  }
+}
