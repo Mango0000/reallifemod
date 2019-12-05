@@ -7,6 +7,7 @@ tile.compressedcoal.name=Compressed Coal
 tile.BlockRafenerie.name=Rafenerie
 item.oilbucket.name=Oil Bucket
 tile.day_night_block.name=Day Night Light Block
+tile.generator.name=Leo Generator
 item.sawmil_blade.name=Sawmil Blade
 tile.sawmi
 //Potions

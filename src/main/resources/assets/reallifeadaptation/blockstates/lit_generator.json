@@ -1,0 +1,13 @@
+{
+  "variants":
+  {
+    "burning=false,facing=north": { "model": "reallifeadaptation:generator" },
+    "burning=false,facing=east": { "model": "reallifeadaptation:generator", "y": 90 },
+    "burning=false,facing=south": { "model": "reallifeadaptation:generator", "y": 180 },
+    "burning=false,facing=west": { "model": "reallifeadaptation:generator", "y": 270 },
+    "burning=true,facing=north": { "model": "reallifeadaptation:lit_generator" },
+    "burning=true,facing=east": { "model": "reallifeadaptation:lit_generator", "y": 90 },
+    "burning=true,facing=south": { "model": "reallifeadaptation:lit_generator", "y": 180 },
+    "burning=true,facing=west": { "model": "reallifeadaptation:lit_generator", "y":270  }
+  }
+}

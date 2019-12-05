@@ -2,12 +2,14 @@ package at.kaindorf.reallifeadaptation.proxy;
 
 
 import at.kaindorf.reallifeadaptation.Machines.MachineCustomFurnace;
+import at.kaindorf.reallifeadaptation.Machines.MachineGenerator;
 import at.kaindorf.reallifeadaptation.Machines.MachineIronFurnace;
 import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
 import at.kaindorf.reallifeadaptation.blocks.*;
 import at.kaindorf.reallifeadaptation.items.*;
 import at.kaindorf.reallifeadaptation.potions.BeerPotion;
 import at.kaindorf.reallifeadaptation.tileentity.TileEntityCustomFurnace;
+import at.kaindorf.reallifeadaptation.tileentity.TileEntityGenerator;
 import at.kaindorf.reallifeadaptation.util.handlers.GuiHandler;
 import com.google.gson.JsonObject;
 import net.minecraft.block.Block;
@@ -72,6 +74,9 @@ public class CommonProxy {
     public static final Block red_traffic_light_lamp = new BlockTrafficLight("red_traffic_light_block",Material.ROCK);
     public static final Block machine_iron_furnace = new MachineIronFurnace(false, "machine_iron_furnace");
     public static final Block CUSTOM_FURNACE = new MachineCustomFurnace("custom_furnace");
+    public static final Block GENERATOR = new MachineGenerator("generator", false);
+    public static final Block ON_GENERATOR = new MachineGenerator("lit_generator", true);
+    public static final TileEntity tileEntityGenerator = new TileEntityGenerator();
     public static final TileEntity te = new TileEntityCustomFurnace();
     public static final Item SAWMIL_BLADE = new ItemBlade("sawmil_blade", 4);
     public void preInit(FMLPreInitializationEvent e) {
@@ -116,6 +121,8 @@ public class CommonProxy {
         event.getRegistry().registerAll(new ItemBlock(lit_streetlightblock).setRegistryName(lit_streetlightblock.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(machine_iron_furnace).setRegistryName(machine_iron_furnace.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(CUSTOM_FURNACE).setRegistryName(CUSTOM_FURNACE.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(GENERATOR).setRegistryName(GENERATOR.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(ON_GENERATOR).setRegistryName(ON_GENERATOR.getRegistryName()));
     }
 
     @SubscribeEvent
@@ -139,6 +146,8 @@ public class CommonProxy {
         registerRender(Item.getItemFromBlock(traffic_light_block));
         registerRender(Item.getItemFromBlock(machine_iron_furnace));
         registerRender(Item.getItemFromBlock(CUSTOM_FURNACE));
+        registerRender(Item.getItemFromBlock(GENERATOR));
+        registerRender(Item.getItemFromBlock(ON_GENERATOR));
 
 
     }
@@ -163,6 +172,7 @@ public class CommonProxy {
     public static void registerTileEntities()
     {
         GameRegistry.registerTileEntity(TileEntityCustomFurnace.class, new ResourceLocation(RealLifeAdaptation.MODID + ":custom_furnace"));
+        GameRegistry.registerTileEntity(TileEntityGenerator.class, new ResourceLocation(RealLifeAdaptation.MODID + ":generator"));
     }
 
     private static void registerPotionMixes(){
