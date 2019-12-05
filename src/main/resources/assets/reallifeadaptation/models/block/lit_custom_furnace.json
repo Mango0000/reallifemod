@@ -1,0 +1,12 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "particle": "reallifeadaptation:blocks/custom_furnace_side",
+    "up": "reallifeadaptation:blocks/custom_furnace_side",
+    "down": "reallifeadaptation:blocks/custom_furnace_side",
+    "north": "reallifeadaptation:blocks/custom_furnace_front_on",
+    "east": "reallifeadaptation:blocks/custom_furnace_side",
+    "south": "reallifeadaptation:blocks/custom_furnace_side",
+    "west": "reallifeadaptation:blocks/custom_furnace_side"
+  }
+}
