@@ -1,0 +1,30 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "reallifeadaptation:blocks/lamp3",
+		"particle": "reallifeadaptation:blocks/lamp2"
+	},
+	"elements": [
+		{
+			"name": "lamp",
+			"from": [5, 0, 0],
+			"to": [11, 16, 5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 0]},
+			"faces": {
+				"north": {"uv": [2.5, 2.5, 5.5, 10.5], "texture": "#0"},
+				"east": {"uv": [0, 2.5, 2.5, 10.5], "texture": "#0"},
+				"south": {"uv": [8, 2.5, 11, 10.5], "texture": "#0"},
+				"west": {"uv": [5.5, 2.5, 8, 10.5], "texture": "#0"},
+				"up": {"uv": [5.5, 2.5, 2.5, 0], "texture": "#0"},
+				"down": {"uv": [8.5, 0, 5.5, 2.5], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "lamp",
+			"origin": [0, 0, 0],
+			"children": [0]
+		}
+	]
+}

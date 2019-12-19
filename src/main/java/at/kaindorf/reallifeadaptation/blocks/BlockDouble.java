@@ -44,7 +44,7 @@ public class BlockDouble extends Block {
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-        return super.canPlaceBlockAt(worldIn, pos) && worldIn.isAirBlock(pos.up());
+        return super.canPlaceBlockAt(worldIn, pos) && worldIn.isAirBlock(pos.up()) && worldIn.isAirBlock(pos.up(2));
     }
 
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
@@ -57,15 +57,74 @@ public class BlockDouble extends Block {
 
     }
 
-    public void placeAt(World worldIn, BlockPos lowerPos, BlockDoublePlant.EnumPlantType variant, int flags)
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
-        worldIn.setBlockState(lowerPos, this.getDefaultState().withProperty(HALF, BlockDouble.EnumBlockHalf.LOWER), flags);
-        worldIn.setBlockState(lowerPos.up(), this.getDefaultState().withProperty(HALF, BlockDouble.EnumBlockHalf.UPPER), flags);
+        if (state.getValue(HALF) == BlockDouble.EnumBlockHalf.UPPER)
+        {
+            BlockPos blockpos = pos.down();
+            IBlockState iblockstate = worldIn.getBlockState(blockpos);
+
+            if (iblockstate.getBlock() != this)
+            {
+                worldIn.setBlockToAir(pos);
+            }
+            else if (blockIn != this)
+            {
+                iblockstate.neighborChanged(worldIn, blockpos, blockIn, fromPos);
+            }
+        }/*else if(state.getValue(HALF) == EnumBlockHalf.MIDDLE){
+            BlockPos blockpos = pos.down();
+            IBlockState iblockstate = worldIn.getBlockState(blockpos);
+
+            if (iblockstate.getBlock() != this)
+            {
+                worldIn.setBlockToAir(pos);
+            }
+            else if (blockIn != this)
+            {
+                iblockstate.neighborChanged(worldIn, blockpos, blockIn, fromPos);
+            }
+            blockpos = pos.up();
+            iblockstate = worldIn.getBlockState(blockpos);
+
+            if (iblockstate.getBlock() != this)
+            {
+                worldIn.setBlockToAir(pos);
+            }
+            else if (blockIn != this)
+            {
+                iblockstate.neighborChanged(worldIn, blockpos, blockIn, fromPos);
+            }
+        }*/
+        else
+        {
+            boolean flag1 = false;
+            BlockPos blockpos1 = pos.up();
+            IBlockState iblockstate1 = worldIn.getBlockState(blockpos1);
+
+            if (iblockstate1.getBlock() != this)
+            {
+                worldIn.setBlockToAir(pos);
+                flag1 = true;
+            }
+
+            if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn,  pos.down(), EnumFacing.UP))
+            {
+                worldIn.setBlockToAir(pos);
+                flag1 = true;
+
+                if (iblockstate1.getBlock() == this)
+                {
+                    worldIn.setBlockToAir(blockpos1);
+                }
+            }
+        }
     }
 
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
-        worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(HALF, BlockDouble.EnumBlockHalf.UPPER), 2);
+        worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(HALF, EnumBlockHalf.MIDDLE), 2);
+        worldIn.setBlockState(pos.up(2), this.getDefaultState().withProperty(HALF, BlockDouble.EnumBlockHalf.UPPER), 2);
     }
 
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
@@ -100,6 +159,7 @@ public class BlockDouble extends Block {
     public static enum EnumBlockHalf implements IStringSerializable
     {
         UPPER,
+        MIDDLE,
         LOWER;
 
         public String toString()
@@ -109,12 +169,22 @@ public class BlockDouble extends Block {
 
         public String getName()
         {
-            return this == UPPER ? "upper" : "lower";
+            return this == UPPER ? "upper" : this == LOWER ? "lower" : "middle";
         }
     }
 
     @Override
     public boolean isReplaceableOreGen(IBlockState state, IBlockAccess world, BlockPos pos, Predicate<IBlockState> target) {
         return true;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isFullBlock(IBlockState state) {
+        return false;
     }
 }

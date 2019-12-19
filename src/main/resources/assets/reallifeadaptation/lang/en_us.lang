@@ -9,6 +9,7 @@ item.oilbucket.name=Oil Bucket
 tile.day_night_block.name=Day Night Light Block
 tile.generator.name=Leo Generator
 item.sawmil_blade.name=Sawmil Blade
+tile.double.name=double
 tile.sawmi
 //Potions
 effect.beerpotion=Beer Potion
