@@ -1,6 +1,7 @@
 {
   "variants": {
-    "half=upper": { "model": "reallifeadaptation:traffic_light_block"},
-    "half=lower": { "model": "reallifeadaptation:traffic_light_block"}
+    "half=upper": { "model": "reallifeadaptation:lamp"},
+    "half=lower": { "model": "reallifeadaptation:lamp_bottom"},
+    "half=middle": { "model": "reallifeadaptation:lamp_middle"}
   }
 }

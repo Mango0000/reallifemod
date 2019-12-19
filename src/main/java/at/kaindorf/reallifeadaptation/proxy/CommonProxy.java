@@ -79,6 +79,7 @@ public class CommonProxy {
     public static final TileEntity tileEntityGenerator = new TileEntityGenerator();
     public static final TileEntity te = new TileEntityCustomFurnace();
     public static final Item SAWMIL_BLADE = new ItemBlade("sawmil_blade", 4);
+    public static final Block BLOCK_DOUBLE = new BlockDouble(Material.ROCK, "double");
     public void preInit(FMLPreInitializationEvent e) {
 
     }
@@ -106,7 +107,7 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().registerAll(electricstreetlight, streetlightblock, compressedcoal,
-                rafenerie_block, day_night_block, traffic_light_block, lit_streetlightblock, machine_iron_furnace, CUSTOM_FURNACE);
+                rafenerie_block, day_night_block, traffic_light_block, lit_streetlightblock, machine_iron_furnace, CUSTOM_FURNACE, BLOCK_DOUBLE);
     }
 
 
@@ -123,6 +124,7 @@ public class CommonProxy {
         event.getRegistry().registerAll(new ItemBlock(CUSTOM_FURNACE).setRegistryName(CUSTOM_FURNACE.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(GENERATOR).setRegistryName(GENERATOR.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(ON_GENERATOR).setRegistryName(ON_GENERATOR.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(BLOCK_DOUBLE).setRegistryName(BLOCK_DOUBLE.getRegistryName()));
     }
 
     @SubscribeEvent
@@ -148,7 +150,7 @@ public class CommonProxy {
         registerRender(Item.getItemFromBlock(CUSTOM_FURNACE));
         registerRender(Item.getItemFromBlock(GENERATOR));
         registerRender(Item.getItemFromBlock(ON_GENERATOR));
-
+        registerRender(Item.getItemFromBlock(BLOCK_DOUBLE));
 
     }
 
