@@ -8,6 +8,7 @@ import at.kaindorf.reallifeadaptation.tileentity.TileEntityGenerator;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiGenerator extends GuiContainer {
@@ -37,14 +38,22 @@ public class GuiGenerator extends GuiContainer {
         this.mc.getTextureManager().bindTexture(TEXTURES);
         this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 
-        if(TileEntityGenerator.isBurning(tileentity))
+//        if(TileEntityGenerator.isBurning(tileentity))
+//        {
+//            int k = this.getBurnLeftScaled(13);
+//            this.drawTexturedModalRect(this.guiLeft + 8, this.guiTop + 54 + 12 - k, 176, 12 - k, 14, k + 1);
+//        }
+//
+//        int l = this.getCookProgressScaled(24);
+//        this.drawTexturedModalRect(this.guiLeft + 44, this.guiTop + 36, 176, 14, l + 1, 16);
+        if (TileEntityGenerator.isBurning(tileentity))
         {
             int k = this.getBurnLeftScaled(13);
-            this.drawTexturedModalRect(this.guiLeft + 8, this.guiTop + 54 + 12 - k, 176, 12 - k, 14, k + 1);
+            this.drawTexturedModalRect(this.guiLeft + 56, this.guiTop + 36 + 12 - k, 176, 12 - k, 14, k + 1);
         }
-
         int l = this.getCookProgressScaled(24);
-        this.drawTexturedModalRect(this.guiLeft + 44, this.guiTop + 36, 176, 14, l + 1, 16);
+        this.drawTexturedModalRect(this.guiLeft + 79, this.guiTop + 34, 176, 14, l + 1, 16);
+
     }
 
     private int getBurnLeftScaled(int pixels)

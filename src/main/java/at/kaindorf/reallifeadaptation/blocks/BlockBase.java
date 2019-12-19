@@ -8,9 +8,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBase extends Block {
-
-    private static final String NAME = "street_light";
-
     public BlockBase(String name, Material materialIn) {
         super(materialIn);
 
