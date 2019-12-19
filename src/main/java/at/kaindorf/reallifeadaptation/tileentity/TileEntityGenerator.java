@@ -1,10 +1,12 @@
 package at.kaindorf.reallifeadaptation.tileentity;
 
 import at.kaindorf.reallifeadaptation.Machines.MachineCustomFurnace;
+import at.kaindorf.reallifeadaptation.Machines.MachineGenerator;
 import at.kaindorf.reallifeadaptation.items.ItemBlade;
 import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import at.kaindorf.reallifeadaptation.recipes.CustormFurnaceRecipes;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -31,7 +33,7 @@ public class TileEntityGenerator extends TileEntity implements ITickable {
     private ItemStackHandler handler = new ItemStackHandler(4);
     private String customName;
     private ItemStack smelting = ItemStack.EMPTY;
-
+    private boolean flag;
     private int burnTime;
     private int currentBurnTime;
     private int cookTime;
@@ -100,32 +102,23 @@ public class TileEntityGenerator extends TileEntity implements ITickable {
         EnumFacing facing = ourState.getValue(MachineCustomFurnace.FACING);
         BlockPos destinationPos = pos.offset(facing);
 
-        TileEntity tileent = world.getTileEntity(destinationPos);
-        if (tileent == null) {
-            return;
-        }
-        if (!tileent.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite())) {
-            return;
-        }
-        IItemHandler handler2 = tileent.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite());
         if (this.isBurning()) {
             --this.burnTime;
-            MachineCustomFurnace.setState(true, world, pos);
+            System.out.println(burnTime);
         }
 
         ItemStack fuel = this.handler.getStackInSlot(0);
+       // System.out.println(isItemFuel(fuel));
 
         if(isItemFuel(fuel) && !this.isBurning()){
             this.burnTime = getItemBurnTime(fuel);
-            this.handler.getStackInSlot(0).shrink(1);
+            this.currentBurnTime = burnTime;
+            flag = false;
         }
-
-        if (this.isBurning()){
-            world.setBlockState(pos, CommonProxy.ON_GENERATOR.getDefaultState());
-        }else{
-            world.setBlockState(pos, CommonProxy.GENERATOR.getDefaultState());
+        if(burnTime == currentBurnTime && isItemFuel(fuel)){
+            fuel.shrink(1);
         }
-        return;
+        MachineGenerator.setState(this.isBurning(), world, pos);
     }
 
 
@@ -133,7 +126,10 @@ public class TileEntityGenerator extends TileEntity implements ITickable {
         if (fuel.isEmpty()) return 0;
         else {
             Item item = fuel.getItem();
-            if (item == CommonProxy.fuelContainer) return 4800;
+            if (item == CommonProxy.fuelContainer){
+                System.out.println("test");
+                return 100;
+            }
             return GameRegistry.getFuelValue(fuel);
         }
     }
