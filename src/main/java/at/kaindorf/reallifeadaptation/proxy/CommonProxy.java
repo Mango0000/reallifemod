@@ -107,7 +107,7 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().registerAll(electricstreetlight, streetlightblock, compressedcoal,
-                rafenerie_block, day_night_block, traffic_light_block, lit_streetlightblock, machine_iron_furnace, CUSTOM_FURNACE, BLOCK_DOUBLE);
+                rafenerie_block, day_night_block, traffic_light_block, lit_streetlightblock, machine_iron_furnace, CUSTOM_FURNACE, BLOCK_DOUBLE, orange_traffic_light_lamp, red_traffic_light_lamp);
     }
 
 
@@ -125,6 +125,8 @@ public class CommonProxy {
         event.getRegistry().registerAll(new ItemBlock(GENERATOR).setRegistryName(GENERATOR.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(ON_GENERATOR).setRegistryName(ON_GENERATOR.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(BLOCK_DOUBLE).setRegistryName(BLOCK_DOUBLE.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(orange_traffic_light_lamp).setRegistryName(orange_traffic_light_lamp.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(red_traffic_light_lamp).setRegistryName(red_traffic_light_lamp.getRegistryName()));
     }
 
     @SubscribeEvent
@@ -151,6 +153,8 @@ public class CommonProxy {
         registerRender(Item.getItemFromBlock(GENERATOR));
         registerRender(Item.getItemFromBlock(ON_GENERATOR));
         registerRender(Item.getItemFromBlock(BLOCK_DOUBLE));
+        registerRender(Item.getItemFromBlock(orange_traffic_light_lamp));
+        registerRender(Item.getItemFromBlock(red_traffic_light_lamp));
 
     }
 

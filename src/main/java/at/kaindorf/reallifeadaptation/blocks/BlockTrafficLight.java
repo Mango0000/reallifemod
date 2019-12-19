@@ -30,8 +30,6 @@ public class BlockTrafficLight extends BlockBase implements ITileEntityProvider 
         setDefaultState(getDefaultState().withProperty(FACING, EnumFacing.UP));
         //setRegistryName(name);
         //setUnlocalizedName(name);
-        GameRegistry.registerTileEntity(TileEntityRafenerie.class, new ResourceLocation(RealLifeAdaptation.MODID,
-                "rafenerie_block"));
     }
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
@@ -41,6 +39,10 @@ public class BlockTrafficLight extends BlockBase implements ITileEntityProvider 
     @Override
     public int getMetaFromState(IBlockState state) {
         return state.getValue(FACING).getIndex();
+    }
+
+    public IBlockState getState(){
+        return getDefaultState();
     }
 
     @Override

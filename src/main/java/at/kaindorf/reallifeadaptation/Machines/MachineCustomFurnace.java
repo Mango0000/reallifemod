@@ -54,13 +54,10 @@ public class MachineCustomFurnace  extends BlockBase {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        System.out.println("tset");
         if(!worldIn.isRemote)
         {
-            System.out.println("i am in");
             playerIn.openGui(RealLifeAdaptation.instance, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
-
         return true;
     }
 

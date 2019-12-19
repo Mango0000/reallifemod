@@ -9,6 +9,8 @@ import at.kaindorf.reallifeadaptation.recipes.CustormFurnaceRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -113,6 +115,7 @@ public class TileEntityCustomFurnace extends TileEntity implements ITickable {
         if (tileent == null) {
             return;
         }
+
         if (!tileent.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite())) {
             return;
         }
