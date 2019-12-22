@@ -1,0 +1,9 @@
+{
+  "variants":
+  {
+    "axis=y":  { "model": "reallifeadaptation:copper_log" },
+    "axis=z":   { "model": "reallifeadaptation:copper_log", "x": 90 },
+    "axis=x":   { "model": "reallifeadaptation:copper_log", "x": 90, "y": 90 },
+    "axis=none": { "model": "reallifeadaptation:copper_bark" }
+  }
+}

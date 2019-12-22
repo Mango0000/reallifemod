@@ -6,11 +6,13 @@ import at.kaindorf.reallifeadaptation.Machines.MachineGenerator;
 import at.kaindorf.reallifeadaptation.Machines.MachineIronFurnace;
 import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
 import at.kaindorf.reallifeadaptation.blocks.*;
+import at.kaindorf.reallifeadaptation.blocks.trees.*;
 import at.kaindorf.reallifeadaptation.items.*;
 import at.kaindorf.reallifeadaptation.potions.BeerPotion;
 import at.kaindorf.reallifeadaptation.tileentity.TileEntityCustomFurnace;
 import at.kaindorf.reallifeadaptation.tileentity.TileEntityGenerator;
 import at.kaindorf.reallifeadaptation.util.handlers.GuiHandler;
+import at.kaindorf.reallifeadaptation.world.biomes.BiomeCopper;
 import com.google.gson.JsonObject;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -27,8 +29,10 @@ import net.minecraft.potion.PotionHelper;
 import net.minecraft.potion.PotionType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
@@ -41,6 +45,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.BiomeManager.BiomeEntry;
+import net.minecraftforge.common.BiomeManager.BiomeType;
 
 @Mod.EventBusSubscriber(modid = RealLifeAdaptation.MODID)
 public class CommonProxy {
@@ -79,6 +88,13 @@ public class CommonProxy {
     public static final TileEntity te = new TileEntityCustomFurnace();
     public static final Item SAWMIL_BLADE = new ItemBlade("sawmil_blade", 4);
     public static final Block BLOCK_DOUBLE = new BlockDouble(Material.ROCK, "double");
+    //tree
+    public static final Block COPPER_DIRT = new BlockDirtBase("copper_dirt");
+    public static final Block COPPER_LEAVES = new BlockLeavesBase("copper_leaves");
+    public static final Block COPPER_LOG = new BlockLogBase("copper_log");
+    public static final Block COPPER_PLANK = new BlockCopperPlank("copper_planks", Material.WOOD);
+    public static final Block COPPER_SAPLING = new BlockSaplingBase("copper_sapling");
+    public static final Biome COPPER = new BiomeCopper();
     public void preInit(FMLPreInitializationEvent e) {
 
     }
@@ -97,6 +113,7 @@ public class CommonProxy {
         registerPostion();
         registerTileEntities();
         NetworkRegistry.INSTANCE.registerGuiHandler(RealLifeAdaptation.instance, new GuiHandler());
+        registerBiomes();
     }
 
     public void postInit(FMLPostInitializationEvent e) {
@@ -106,7 +123,9 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().registerAll(electricstreetlight, streetlightblock, compressedcoal,
-                rafenerie_block, day_night_block, traffic_light_block, lit_streetlightblock, machine_iron_furnace, GENERATOR, CUSTOM_FURNACE, BLOCK_DOUBLE, orange_traffic_light_lamp, red_traffic_light_lamp);
+                rafenerie_block, day_night_block, traffic_light_block, lit_streetlightblock, machine_iron_furnace,GENERATOR,
+                CUSTOM_FURNACE, BLOCK_DOUBLE, orange_traffic_light_lamp, red_traffic_light_lamp, COPPER_DIRT,COPPER_LEAVES,
+                COPPER_LOG, COPPER_PLANK, COPPER_SAPLING, COPPER_SAPLING);
     }
 
 
@@ -125,6 +144,12 @@ public class CommonProxy {
         event.getRegistry().registerAll(new ItemBlock(BLOCK_DOUBLE).setRegistryName(BLOCK_DOUBLE.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(orange_traffic_light_lamp).setRegistryName(orange_traffic_light_lamp.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(red_traffic_light_lamp).setRegistryName(red_traffic_light_lamp.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(COPPER_DIRT).setRegistryName(COPPER_DIRT.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(COPPER_LEAVES).setRegistryName(COPPER_LEAVES.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(COPPER_LOG).setRegistryName(COPPER_LOG.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(COPPER_PLANK).setRegistryName(COPPER_PLANK.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(COPPER_SAPLING).setRegistryName(COPPER_SAPLING.getRegistryName()));
+
     }
 
     @SubscribeEvent
@@ -152,6 +177,11 @@ public class CommonProxy {
         registerRender(Item.getItemFromBlock(BLOCK_DOUBLE));
         registerRender(Item.getItemFromBlock(orange_traffic_light_lamp));
         registerRender(Item.getItemFromBlock(red_traffic_light_lamp));
+        registerRender(Item.getItemFromBlock(COPPER_DIRT));
+        registerRender(Item.getItemFromBlock(COPPER_LEAVES));
+        registerRender(Item.getItemFromBlock(COPPER_LOG));
+        registerRender(Item.getItemFromBlock(COPPER_PLANK));
+        registerRender(Item.getItemFromBlock(COPPER_SAPLING));
 
     }
 
@@ -181,6 +211,21 @@ public class CommonProxy {
     private static void registerPotionMixes(){
         PotionHelper.addMix(BEER_POTION, Items.REDSTONE, LONG_BEER_POTION);
         PotionHelper.addMix(PotionTypes.AWKWARD, Items.APPLE, BEER_POTION);
+    }
+
+    public static void registerBiomes()
+    {
+        initBiome(COPPER, "Copper", BiomeType.WARM, Type.HILLS, Type.MOUNTAIN, Type.DRY);
+    }
+
+    private static Biome initBiome(Biome biome, String name, BiomeType biomeType, Type... types)
+    {
+        biome.setRegistryName(name);
+        ForgeRegistries.BIOMES.register(biome);
+        BiomeDictionary.addTypes(biome, types);
+        BiomeManager.addBiome(biomeType, new BiomeEntry(biome, 10));
+        BiomeManager.addSpawnBiome(biome);
+        return biome;
     }
 
 
