@@ -29,14 +29,12 @@ import java.util.Random;
 public class MachineGenerator extends BlockBase {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public static final PropertyBool BURNING = PropertyBool.create("burning");
-    public final boolean isOn;
     private static boolean keepInventory;
-    public MachineGenerator(String name, boolean isOn)
+    public MachineGenerator(String name)
     {
         super(name, Material.IRON);
         setSoundType(SoundType.METAL);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(BURNING, false));
-        this.isOn = isOn;
     }
 
     @Override
@@ -88,12 +86,12 @@ public class MachineGenerator extends BlockBase {
 
     @Override
     public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-        return isOn ? 15 : 0;
+        return blockState.getValue(BURNING) ? 15 : 0;
     }
 
     @Override
     public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-        return isOn ? 15:0;
+        return blockState.getValue(BURNING) ? 15 : 0;
     }
 
     @Override
@@ -160,21 +158,12 @@ public class MachineGenerator extends BlockBase {
 
     public static void setState(boolean active, World worldIn, BlockPos pos)
     {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
+        IBlockState state = worldIn.getBlockState(pos);
         TileEntity tileentity = worldIn.getTileEntity(pos);
         keepInventory = true;
 
-        if (active)
-        {
-            worldIn.setBlockState(pos, CommonProxy.ON_GENERATOR.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-            worldIn.setBlockState(pos, CommonProxy.ON_GENERATOR.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-        }
-        else
-        {
-            worldIn.setBlockState(pos, CommonProxy.GENERATOR.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-            worldIn.setBlockState(pos, CommonProxy.GENERATOR.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-        }
-
+        if(active) worldIn.setBlockState(pos, CommonProxy.GENERATOR.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(BURNING, true), 3);
+        else worldIn.setBlockState(pos, CommonProxy.GENERATOR.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(BURNING, false), 3);
         keepInventory = false;
 
         if (tileentity != null)

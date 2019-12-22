@@ -7,6 +7,7 @@ import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import at.kaindorf.reallifeadaptation.recipes.CustormFurnaceRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -118,7 +119,9 @@ public class TileEntityGenerator extends TileEntity implements ITickable {
         if(burnTime == currentBurnTime && isItemFuel(fuel)){
             fuel.shrink(1);
         }
-        MachineGenerator.setState(this.isBurning(), world, pos);
+        if((boolean)ourState.getValue(MachineGenerator.BURNING) != this.isBurning()) {
+            MachineGenerator.setState(this.isBurning(), world, pos);
+        }
     }
 
 
