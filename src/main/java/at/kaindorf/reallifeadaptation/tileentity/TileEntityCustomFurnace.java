@@ -6,6 +6,7 @@ import at.kaindorf.reallifeadaptation.items.ItemBlade;
 import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import at.kaindorf.reallifeadaptation.recipes.CustormFurnaceRecipes;
 
+import at.kaindorf.reallifeadaptation.util.RedsonteUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -113,6 +114,9 @@ public class TileEntityCustomFurnace extends TileEntity implements ITickable {
 
         TileEntity tileent = world.getTileEntity(destinationPos);
         if (tileent == null) {
+            return;
+        }
+        if(!RedsonteUtil.isPowered(world, pos)){
             return;
         }
 
@@ -225,7 +229,7 @@ public class TileEntityCustomFurnace extends TileEntity implements ITickable {
 //            if (item == Items.LAVA_BUCKET) return 20000;
 //            if (item == Item.getItemFromBlock(Blocks.SAPLING)) return 100;
 //            if (item == Items.BLAZE_ROD) return 2400;
-            if (item == CommonProxy.fuelContainer) return 4800;
+            if (item == CommonProxy.fuelContainer) return 1500;
             return GameRegistry.getFuelValue(fuel);
         }
     }

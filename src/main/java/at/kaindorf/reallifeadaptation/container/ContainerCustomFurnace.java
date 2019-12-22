@@ -23,10 +23,9 @@ public class ContainerCustomFurnace extends Container{
         this.tileentity = tileentity;
         IItemHandler handler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-        this.addSlotToContainer(new SlotItemHandler(handler, 0, 26, 11));
-        this.addSlotToContainer(new SlotItemHandler(handler, 1, 26, 59));
-        this.addSlotToContainer(new SlotItemHandler(handler, 2, 7, 35));
-        this.addSlotToContainer(new SlotItemHandler(handler, 3, 81, 36));
+        this.addSlotToContainer(new SlotItemHandler(handler, 0, 17, 17));
+        this.addSlotToContainer(new SlotItemHandler(handler, 1, 17, 53));
+        this.addSlotToContainer(new SlotItemHandler(handler, 2, 56, 53));
 
         for(int y = 0; y < 3; y++)
         {

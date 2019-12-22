@@ -38,11 +38,11 @@ public class GuiSinteringFurnace extends GuiContainer {
         if(TileEntityCustomFurnace.isBurning(tileentity))
         {
             int k = this.getBurnLeftScaled(13);
-            this.drawTexturedModalRect(this.guiLeft + 8, this.guiTop + 54 + 12 - k, 176, 12 - k, 14, k + 1);
+            this.drawTexturedModalRect(this.guiLeft + 57, this.guiTop + 36 + 12 - k, 176, 12 - k, 14, k + 1);
         }
 
         int l = this.getCookProgressScaled(24);
-        this.drawTexturedModalRect(this.guiLeft + 44, this.guiTop + 36, 176, 14, l + 1, 16);
+        this.drawTexturedModalRect(this.guiLeft + 80, this.guiTop + 34, 176, 14, l + 1, 16);
     }
 
     private int getBurnLeftScaled(int pixels)
