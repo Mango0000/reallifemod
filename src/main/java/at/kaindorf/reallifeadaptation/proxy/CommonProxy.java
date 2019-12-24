@@ -8,23 +8,22 @@ import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
 import at.kaindorf.reallifeadaptation.blocks.*;
 import at.kaindorf.reallifeadaptation.blocks.trees.*;
 import at.kaindorf.reallifeadaptation.items.*;
+import at.kaindorf.reallifeadaptation.items.armor.ArmorBase;
 import at.kaindorf.reallifeadaptation.potions.BeerPotion;
 import at.kaindorf.reallifeadaptation.tileentity.TileEntityCustomFurnace;
 import at.kaindorf.reallifeadaptation.tileentity.TileEntityGenerator;
 import at.kaindorf.reallifeadaptation.util.handlers.GuiHandler;
 import at.kaindorf.reallifeadaptation.world.biomes.BiomeCopper;
-import at.kaindorf.tabs.TabBlocks;
-import at.kaindorf.tabs.TabItems;
-import at.kaindorf.tabs.TabMachine;
-import at.kaindorf.tabs.TabTrees;
 import com.google.gson.JsonObject;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
@@ -40,6 +39,7 @@ import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -49,7 +49,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
@@ -99,7 +98,13 @@ public class CommonProxy {
     public static final Block COPPER_PLANK = new BlockCopperPlank("copper_planks", Material.WOOD);
     public static final Block COPPER_SAPLING = new BlockSaplingBase("copper_sapling");
     public static final Biome COPPER = new BiomeCopper();
-
+    //Armor
+    public static final ItemArmor.ArmorMaterial ARMOR_MATERIAL_RUBBER = EnumHelper.addArmorMaterial("armor_material_rubber", RealLifeAdaptation.MODID + ":" + "rubber", 10,
+            new int[] {2,5,7,3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,0.0f);
+    public static final Item RUBBER_HELMET = new ArmorBase("rubber_helmet", ARMOR_MATERIAL_RUBBER, 1, EntityEquipmentSlot.HEAD);
+    public static final Item RUBBER_CHEST = new ArmorBase("rubber_chestplate", ARMOR_MATERIAL_RUBBER, 1, EntityEquipmentSlot.CHEST);
+    public static final Item RUBBER_LEGGINGS = new ArmorBase("rubber_leggings", ARMOR_MATERIAL_RUBBER, 2, EntityEquipmentSlot.LEGS);
+    public static final Item RUBBER_BOOTS = new ArmorBase("rubber_boots",ARMOR_MATERIAL_RUBBER, 1, EntityEquipmentSlot.FEET);
     public void preInit(FMLPreInitializationEvent e) {
 
     }
@@ -159,7 +164,8 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().registerAll(fuelContainer, rubber, rubberbucket, oilbucket, SAWMIL_BLADE);
+        event.getRegistry().registerAll(fuelContainer, rubber, rubberbucket, oilbucket, SAWMIL_BLADE, RUBBER_BOOTS,
+                RUBBER_CHEST, RUBBER_HELMET, RUBBER_LEGGINGS);
     }
 
     @SubscribeEvent
@@ -168,7 +174,10 @@ public class CommonProxy {
         registerRender(rubber);
         registerRender(rubberbucket);
         registerRender(oilbucket);
-        registerRender(SAWMIL_BLADE);
+        registerRender(RUBBER_BOOTS);
+        registerRender(RUBBER_CHEST);
+        registerRender(RUBBER_HELMET);
+        registerRender(RUBBER_LEGGINGS);
         registerRender(Item.getItemFromBlock(lit_streetlightblock));
         registerRender(Item.getItemFromBlock(electricstreetlight));
         registerRender(Item.getItemFromBlock(streetlightblock));

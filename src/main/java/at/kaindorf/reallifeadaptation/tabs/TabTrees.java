@@ -1,4 +1,4 @@
-package at.kaindorf.tabs;
+package at.kaindorf.reallifeadaptation.tabs;
 
 import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;

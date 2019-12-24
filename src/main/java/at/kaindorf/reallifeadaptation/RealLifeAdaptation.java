@@ -1,10 +1,7 @@
 package at.kaindorf.reallifeadaptation;
 
 import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
-import at.kaindorf.tabs.TabBlocks;
-import at.kaindorf.tabs.TabItems;
-import at.kaindorf.tabs.TabMachine;
-import at.kaindorf.tabs.TabTrees;
+import at.kaindorf.reallifeadaptation.tabs.*;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.Mod;
@@ -31,6 +28,7 @@ public class RealLifeAdaptation {
     public static final CreativeTabs TREE_TAB = new TabTrees("tree_tab");
     public static final CreativeTabs BLOCK_TAB = new TabBlocks("block_tab");
     public static final CreativeTabs ITEM_TAB = new TabItems("item_tab");
+    public static final CreativeTabs ARMOR_TAB = new TabArmor("armor_tab");
 
 
     @Mod.EventHandler

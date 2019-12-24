@@ -1,18 +1,19 @@
-package at.kaindorf.tabs;
+package at.kaindorf.reallifeadaptation.tabs;
 
 import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
-public class TabBlocks extends CreativeTabs {
+public class TabItems extends CreativeTabs {
 
-    public TabBlocks(String label){
-        super("Blocks");
+
+    public TabItems(String label){
+        super("Items");
         this.setBackgroundImageName("custom_creative_tab.png");
     }
 
     @Override
     public ItemStack getTabIconItem() {
-        return new ItemStack(CommonProxy.compressedcoal);
+        return new ItemStack(CommonProxy.oilbucket);
     }
 }

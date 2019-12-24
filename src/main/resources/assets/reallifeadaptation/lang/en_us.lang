@@ -30,3 +30,9 @@ itemGroup.Machines=Machines
 itemGroup.Items=Items
 itemGroup.Trees=Trees
 itemGroup.Blocks=Blocks
+itemGroup.Armor=Armor
+//Armor
+item.rubber_leggins.name=Racer Leggins
+item.rubber_helmet.name=Racer Helmet
+item.rubber_chestplate.name=Racer Chestplate
+item.rubber_boots.name=Racer boots

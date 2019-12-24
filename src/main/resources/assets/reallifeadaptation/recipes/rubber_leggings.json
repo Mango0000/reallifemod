@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "# #",
+        "# #"
+    ],
+    "key": {
+        "#": {
+            "item": "reallifeadaptation:rubber"
+        }
+    },
+    "result": {
+        "item": "reallifeadaptation:rubber_leggings",
+        "count": 1
+    }
+}
