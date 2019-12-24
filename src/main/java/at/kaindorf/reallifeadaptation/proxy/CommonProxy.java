@@ -13,6 +13,10 @@ import at.kaindorf.reallifeadaptation.tileentity.TileEntityCustomFurnace;
 import at.kaindorf.reallifeadaptation.tileentity.TileEntityGenerator;
 import at.kaindorf.reallifeadaptation.util.handlers.GuiHandler;
 import at.kaindorf.reallifeadaptation.world.biomes.BiomeCopper;
+import at.kaindorf.tabs.TabBlocks;
+import at.kaindorf.tabs.TabItems;
+import at.kaindorf.tabs.TabMachine;
+import at.kaindorf.tabs.TabTrees;
 import com.google.gson.JsonObject;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -95,6 +99,7 @@ public class CommonProxy {
     public static final Block COPPER_PLANK = new BlockCopperPlank("copper_planks", Material.WOOD);
     public static final Block COPPER_SAPLING = new BlockSaplingBase("copper_sapling");
     public static final Biome COPPER = new BiomeCopper();
+
     public void preInit(FMLPreInitializationEvent e) {
 
     }

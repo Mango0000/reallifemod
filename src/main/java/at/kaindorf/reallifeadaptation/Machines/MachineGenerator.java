@@ -34,6 +34,7 @@ public class MachineGenerator extends BlockBase {
     {
         super(name, Material.IRON);
         setSoundType(SoundType.METAL);
+        this.setCreativeTab(RealLifeAdaptation.MACHINE_TAB);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(BURNING, false));
     }
 

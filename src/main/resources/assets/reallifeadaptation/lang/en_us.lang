@@ -17,3 +17,16 @@ potion.effect.beerpotion=Potion of Beer Potion
 splash_potion.effect.beerpotion=Splash Potion of Beer Potion
 lingering_potion.effect.beerpotion=Lingering Potion of Beer Potion
 tipped_arrow.effect.beerpotion=Arrow of Beer Potion
+//tree
+tile.copper_planks.name=Rubberwood Plank
+tile.copper_dirt.name=Rubberbiome dirt
+tile.copper_leaves.name=Rubbertreeleave
+tile.copper_log.name=Rubberwood Log
+tile.copper_sapling.name=Rubbertree Sapling
+tile.custom_furnace.name=Sawmil
+tile.rafenerie_block.name=Raffenerie
+tile.traffic_light_block.name=Traffic Light
+itemGroup.Machines=Machines
+itemGroup.Items=Items
+itemGroup.Trees=Trees
+itemGroup.Blocks=Blocks

@@ -2,6 +2,8 @@ package at.kaindorf.reallifeadaptation.blocks.trees;
 
 import java.util.Random;
 
+import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
+import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import at.kaindorf.reallifeadaptation.util.interfaces.IHasModel;
 import at.kaindorf.reallifeadaptation.world.generation.generators.WorldGenRubberTree;
 import net.minecraft.block.BlockBush;
@@ -33,9 +35,15 @@ public class BlockSaplingBase extends BlockBush implements IGrowable, IHasModel
         setUnlocalizedName(name);
         setRegistryName(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, Integer.valueOf(0)));
-        setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+        setCreativeTab(RealLifeAdaptation.TREE_TAB);
 
         type = name.replaceAll("_sapling", "").trim();
+    }
+
+    @Override
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+        IBlockState soil = worldIn.getBlockState(pos.down());
+        return soil == CommonProxy.COPPER_DIRT.getDefaultState();
     }
 
     //Sapling Shape

@@ -1,5 +1,7 @@
 package at.kaindorf.reallifeadaptation.blocks.trees;
 
+import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
+import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import at.kaindorf.reallifeadaptation.util.interfaces.IHasModel;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.SoundType;
@@ -17,7 +19,7 @@ public class BlockLogBase extends BlockLog implements IHasModel
         setRegistryName(name);
         setSoundType(SoundType.WOOD);
         setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, EnumAxis.Y));
-        setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+        setCreativeTab(RealLifeAdaptation.TREE_TAB);
     }
 
     @Override

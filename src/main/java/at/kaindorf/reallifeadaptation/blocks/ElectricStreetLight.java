@@ -1,6 +1,8 @@
 package at.kaindorf.reallifeadaptation.blocks;
 
+import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
 import at.kaindorf.reallifeadaptation.proxy.ClientProxy;
+import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneLight;
 import net.minecraft.block.state.IBlockState;
@@ -16,7 +18,7 @@ public class ElectricStreetLight extends BlockRedstoneLight {
         super(isOn);
         this.setUnlocalizedName("electric_light_block");
         this.setRegistryName("electric_light_block");
-        this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+        this.setCreativeTab(RealLifeAdaptation.BLOCK_TAB);
         this.isOn = isOn;
 
         if (isOn) {

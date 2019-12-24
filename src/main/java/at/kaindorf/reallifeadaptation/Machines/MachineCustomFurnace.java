@@ -35,6 +35,7 @@ public class MachineCustomFurnace  extends BlockBase {
     public MachineCustomFurnace(String name)
     {
         super(name, Material.IRON);
+        this.setCreativeTab(RealLifeAdaptation.MACHINE_TAB);
         setSoundType(SoundType.METAL);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(BURNING, false));
     }

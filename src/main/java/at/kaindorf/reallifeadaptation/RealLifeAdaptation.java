@@ -1,6 +1,11 @@
 package at.kaindorf.reallifeadaptation;
 
 import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
+import at.kaindorf.tabs.TabBlocks;
+import at.kaindorf.tabs.TabItems;
+import at.kaindorf.tabs.TabMachine;
+import at.kaindorf.tabs.TabTrees;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -21,6 +26,12 @@ public class RealLifeAdaptation {
     serverSide = "at.kaindorf.reallifeadaptation.proxy.ServerProxy")
     private static CommonProxy proxy;
     private static Logger logger;
+
+    public static final CreativeTabs MACHINE_TAB = new TabMachine("machine_tab");
+    public static final CreativeTabs TREE_TAB = new TabTrees("tree_tab");
+    public static final CreativeTabs BLOCK_TAB = new TabBlocks("block_tab");
+    public static final CreativeTabs ITEM_TAB = new TabItems("item_tab");
+
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)

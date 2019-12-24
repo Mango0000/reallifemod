@@ -1,5 +1,7 @@
 package at.kaindorf.reallifeadaptation.Machines;
 
+import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
+import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
@@ -11,7 +13,7 @@ public class MachineBase extends BlockFurnace {
         super(false);
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
-        this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+        this.setCreativeTab(RealLifeAdaptation.MACHINE_TAB);
     }
 
 

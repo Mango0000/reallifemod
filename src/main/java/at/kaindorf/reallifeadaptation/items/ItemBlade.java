@@ -1,5 +1,7 @@
 package at.kaindorf.reallifeadaptation.items;
 
+import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
+import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
@@ -10,7 +12,7 @@ public class ItemBlade extends Item {
     public ItemBlade(String name, int uses){
         setUnlocalizedName(name);
         setRegistryName(name);
-        setCreativeTab(CreativeTabs.MATERIALS);
+        setCreativeTab(RealLifeAdaptation.ITEM_TAB);
         setMaxStackSize(1);
     }
 

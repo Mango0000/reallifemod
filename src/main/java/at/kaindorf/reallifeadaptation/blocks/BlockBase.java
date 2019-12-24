@@ -1,5 +1,7 @@
 package at.kaindorf.reallifeadaptation.blocks;
 
+import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
+import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,7 +15,7 @@ public class BlockBase extends Block {
 
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
-        this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+        setCreativeTab(RealLifeAdaptation.BLOCK_TAB);
     }
 
     @SideOnly(Side.CLIENT)

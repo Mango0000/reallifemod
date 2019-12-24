@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
 import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import at.kaindorf.reallifeadaptation.util.interfaces.IHasModel;
 import net.minecraft.block.BlockLeaves;
@@ -33,14 +34,18 @@ public class BlockLeavesBase extends BlockLeaves implements IHasModel {
         setUnlocalizedName(name);
         setRegistryName(name);
         setSoundType(SoundType.PLANT);
-        setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+        setCreativeTab(RealLifeAdaptation.TREE_TAB);
         setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
     }
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-       return Item.getItemFromBlock(CommonProxy.COPPER_SAPLING);
+        if(rand.nextInt(10) % 2 == 0){
+            return CommonProxy.rubber;
+        }else{
+            return Item.getItemFromBlock(CommonProxy.COPPER_SAPLING);
+        }
     }
 
     @Override
@@ -62,7 +67,7 @@ public class BlockLeavesBase extends BlockLeaves implements IHasModel {
     protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance) {return;}
 
     @Override
-    protected int getSaplingDropChance(IBlockState state) {return 10;}
+    protected int getSaplingDropChance(IBlockState state) {return 5;}
 
     @Override
     public EnumType getWoodType(int meta) {return null;}
