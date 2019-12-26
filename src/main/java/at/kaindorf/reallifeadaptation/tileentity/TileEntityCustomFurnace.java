@@ -1,27 +1,17 @@
 package at.kaindorf.reallifeadaptation.tileentity;
 
-import at.kaindorf.reallifeadaptation.Machines.MachineCustomFurnace;
-import at.kaindorf.reallifeadaptation.blocks.BlockRafenerie;
+import at.kaindorf.reallifeadaptation.Machines.MachineSawmill;
 import at.kaindorf.reallifeadaptation.items.ItemBlade;
 import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import at.kaindorf.reallifeadaptation.recipes.CustormFurnaceRecipes;
 
 import at.kaindorf.reallifeadaptation.util.RedsonteUtil;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -109,7 +99,7 @@ public class TileEntityCustomFurnace extends TileEntity implements ITickable {
 
     public void update() {
         IBlockState ourState = world.getBlockState(pos);
-        EnumFacing facing = ourState.getValue(MachineCustomFurnace.FACING);
+        EnumFacing facing = ourState.getValue(MachineSawmill.FACING);
         BlockPos destinationPos = pos.offset(facing);
 
         TileEntity tileent = world.getTileEntity(destinationPos);
@@ -126,7 +116,7 @@ public class TileEntityCustomFurnace extends TileEntity implements ITickable {
         IItemHandler handler2 = tileent.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite());
         if (this.isBurning()) {
             --this.burnTime;
-            MachineCustomFurnace.setState(true, world, pos);
+            MachineSawmill.setState(true, world, pos);
         }
 
         ItemStack[] inputs = new ItemStack[]{handler.getStackInSlot(0), handler.getStackInSlot(1)};

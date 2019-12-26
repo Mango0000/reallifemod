@@ -1,7 +1,7 @@
 {
   "variants": {
-    "normal": [
-      {"model": "reallifeadaptation:day_night_block"}
-    ]
+    "half=upper": { "model": "reallifeadaptation:lamp"},
+    "half=lower": { "model": "reallifeadaptation:lamp_bottom"},
+    "half=middle": { "model": "reallifeadaptation:lamp_middle"}
   }
 }

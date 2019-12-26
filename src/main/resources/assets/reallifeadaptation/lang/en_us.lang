@@ -1,4 +1,4 @@
-tile.electric_light_block.name=Electric Light Block
+tile.electric_street_light.name=Electric Light Block
 item.fuelcontainer.name=Fuel Container
 item.rubber.name=Rubber
 item.rubberbucket.name=Rubber Bucket
@@ -7,10 +7,10 @@ tile.compressedcoal.name=Compressed Coal
 tile.BlockRafenerie.name=Rafenerie
 item.oilbucket.name=Oil Bucket
 tile.day_night_block.name=Day Night Light Block
-tile.generator.name=Leo Generator
+tile.generator.name=Generator
+tile.generator_upgrade.name=Generator Upgrade
 item.sawmil_blade.name=Sawmil Blade
 tile.double.name=double
-tile.sawmi
 //Potions
 effect.beerpotion=Beer Potion
 potion.effect.beerpotion=Potion of Beer Potion
@@ -32,7 +32,7 @@ itemGroup.Trees=Trees
 itemGroup.Blocks=Blocks
 itemGroup.Armor=Armor
 //Armor
-item.rubber_leggins.name=Racer Leggins
+item.rubber_leggings.name=Racer Leggins
 item.rubber_helmet.name=Racer Helmet
 item.rubber_chestplate.name=Racer Chestplate
 item.rubber_boots.name=Racer boots

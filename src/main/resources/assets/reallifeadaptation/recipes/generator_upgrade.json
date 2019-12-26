@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "CCC",
+        "CMC",
+        "CCC"
+    ],
+    "key": {
+        "M": {
+            "item": "reallifeadaptation:generator"
+        },
+        "C": {
+            "item": "minecraft:diamond"
+        }
+    },
+    "result": {
+        "item": "reallifeadaptation:generator_upgrade",
+        "count": 1
+    }
+}

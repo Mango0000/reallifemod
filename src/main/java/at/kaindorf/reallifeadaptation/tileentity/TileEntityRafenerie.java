@@ -1,6 +1,6 @@
 package at.kaindorf.reallifeadaptation.tileentity;
 
-import at.kaindorf.reallifeadaptation.blocks.BlockRafenerie;
+import at.kaindorf.reallifeadaptation.Machines.MachineRafenerie;
 import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import at.kaindorf.reallifeadaptation.util.RedsonteUtil;
 import net.minecraft.block.state.IBlockState;
@@ -39,7 +39,7 @@ public class TileEntityRafenerie extends TileEntity implements ITickable {
         }
 
         IBlockState ourState = world.getBlockState(pos);
-        EnumFacing facing = ourState.getValue(BlockRafenerie.FACING);
+        EnumFacing facing = ourState.getValue(MachineRafenerie.FACING);
         BlockPos destinationPos = pos.offset(facing);
 
         TileEntity tileent = world.getTileEntity(destinationPos);

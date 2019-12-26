@@ -2,9 +2,8 @@ package at.kaindorf.reallifeadaptation.Machines;
 
 import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
 import at.kaindorf.reallifeadaptation.blocks.BlockBase;
-import at.kaindorf.reallifeadaptation.guis.GuiSinteringFurnace;
 import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
-import at.kaindorf.reallifeadaptation.tileentity.TileEntityCustomFurnace;
+import at.kaindorf.reallifeadaptation.tileentity.TileEntityGeneratorUpgrade;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -18,25 +17,22 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class MachineCustomFurnace  extends BlockBase {
+public class MachineGeneratorUpgrade extends BlockBase {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public static final PropertyBool BURNING = PropertyBool.create("burning");
-
-    public MachineCustomFurnace(String name)
+    private static boolean keepInventory;
+    public MachineGeneratorUpgrade(String name)
     {
         super(name, Material.IRON);
-        this.setCreativeTab(RealLifeAdaptation.MACHINE_TAB);
         setSoundType(SoundType.METAL);
+        this.setCreativeTab(RealLifeAdaptation.MACHINE_TAB);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(BURNING, false));
     }
 
@@ -57,8 +53,9 @@ public class MachineCustomFurnace  extends BlockBase {
     {
         if(!worldIn.isRemote)
         {
-            playerIn.openGui(RealLifeAdaptation.instance, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            playerIn.openGui(RealLifeAdaptation.instance, 3, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
+
         return true;
     }
 
@@ -81,19 +78,19 @@ public class MachineCustomFurnace  extends BlockBase {
         }
     }
 
-    public static void setState(boolean active, World worldIn, BlockPos pos)
-    {
-        IBlockState state = worldIn.getBlockState(pos);
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+    @Override
+    public boolean canProvidePower(IBlockState state) {
+        return true;
+    }
 
-        if(active) worldIn.setBlockState(pos, CommonProxy.CUSTOM_FURNACE.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(BURNING, true), 3);
-        else worldIn.setBlockState(pos, CommonProxy.CUSTOM_FURNACE.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(BURNING, false), 3);
+    @Override
+    public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+        return blockState.getValue(BURNING) ? 30 : 0;
+    }
 
-        if(tileentity != null)
-        {
-            tileentity.validate();
-            worldIn.setTileEntity(pos, tileentity);
-        }
+    @Override
+    public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+        return blockState.getValue(BURNING) ? 30 : 0;
     }
 
     @Override
@@ -105,7 +102,7 @@ public class MachineCustomFurnace  extends BlockBase {
     @Override
     public TileEntity createTileEntity(World world, IBlockState state)
     {
-        return new TileEntityCustomFurnace();
+        return new TileEntityGeneratorUpgrade();
     }
 
     @Override
@@ -156,5 +153,22 @@ public class MachineCustomFurnace  extends BlockBase {
     public int getMetaFromState(IBlockState state)
     {
         return ((EnumFacing)state.getValue(FACING)).getIndex();
+    }
+
+    public static void setState(boolean active, World worldIn, BlockPos pos)
+    {
+        IBlockState state = worldIn.getBlockState(pos);
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        keepInventory = true;
+
+        if(active) worldIn.setBlockState(pos, CommonProxy.GENERATOR_UPGRADE.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(BURNING, true), 3);
+        else worldIn.setBlockState(pos, CommonProxy.GENERATOR_UPGRADE.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(BURNING, false), 3);
+        keepInventory = false;
+
+        if (tileentity != null)
+        {
+            tileentity.validate();
+            worldIn.setTileEntity(pos, tileentity);
+        }
     }
 }

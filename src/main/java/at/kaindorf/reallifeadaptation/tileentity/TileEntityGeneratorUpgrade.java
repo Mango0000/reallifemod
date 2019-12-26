@@ -1,7 +1,6 @@
 package at.kaindorf.reallifeadaptation.tileentity;
 
-import at.kaindorf.reallifeadaptation.Machines.MachineSawmill;
-import at.kaindorf.reallifeadaptation.Machines.MachineGenerator;
+import at.kaindorf.reallifeadaptation.Machines.MachineGeneratorUpgrade;
 import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityGenerator extends TileEntity implements ITickable {
+public class TileEntityGeneratorUpgrade extends TileEntity implements ITickable {
     private ItemStackHandler handler = new ItemStackHandler(4);
     private String customName;
     private ItemStack smelting = ItemStack.EMPTY;
@@ -86,13 +85,13 @@ public class TileEntityGenerator extends TileEntity implements ITickable {
     }
 
     @SideOnly(Side.CLIENT)
-    public static boolean isBurning(TileEntityGenerator te) {
+    public static boolean isBurning(TileEntityGeneratorUpgrade te) {
         return te.getField(0) > 0;
     }
 
     public void update() {
         IBlockState ourState = world.getBlockState(pos);
-        EnumFacing facing = ourState.getValue(MachineSawmill.FACING);
+        EnumFacing facing = ourState.getValue(MachineGeneratorUpgrade.FACING);
         BlockPos destinationPos = pos.offset(facing);
 
         if (this.isBurning()) {
@@ -111,8 +110,8 @@ public class TileEntityGenerator extends TileEntity implements ITickable {
         if(burnTime == currentBurnTime && isItemFuel(fuel)){
             fuel.shrink(1);
         }
-        if((boolean)ourState.getValue(MachineGenerator.BURNING) != this.isBurning()) {
-            MachineGenerator.setState(this.isBurning(), world, pos);
+        if((boolean)ourState.getValue(MachineGeneratorUpgrade.BURNING) != this.isBurning()) {
+            MachineGeneratorUpgrade.setState(this.isBurning(), world, pos);
         }
     }
 
@@ -122,8 +121,7 @@ public class TileEntityGenerator extends TileEntity implements ITickable {
         else {
             Item item = fuel.getItem();
             if (item == CommonProxy.fuelContainer){
-                System.out.println("test");
-                return 100;
+                return 400;
             }
             return GameRegistry.getFuelValue(fuel);
         }

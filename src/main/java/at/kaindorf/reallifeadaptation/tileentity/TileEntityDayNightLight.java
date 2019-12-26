@@ -1,5 +1,8 @@
 package at.kaindorf.reallifeadaptation.tileentity;
 
+import at.kaindorf.reallifeadaptation.blocks.BlockDayNightLight;
+import at.kaindorf.reallifeadaptation.blocks.BlockElectricStreetLight;
+import at.kaindorf.reallifeadaptation.blocks.BlockStreetLightBlock;
 import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
@@ -18,11 +21,11 @@ public class TileEntityDayNightLight extends TileEntity implements ITickable {
         if (world.isRemote) {
             return;
         }
-        if (!world.isDaytime()) {
-            world.setBlockState(pos, CommonProxy.lit_day_night_block.getDefaultState());
-        } else {
-            if (world.getBlockState(pos) != CommonProxy.day_night_block.getDefaultState()) {
-                world.setBlockState(pos, CommonProxy.day_night_block.getDefaultState());
+        if (world.getBlockState(pos).getValue(((BlockDayNightLight) world.getBlockState(pos).getBlock()).HALF) == BlockStreetLightBlock.EnumBlockHalf.LOWER) {
+            if (!world.isDaytime()) {
+                ((BlockDayNightLight) world.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ())).getBlock()).setState(true, world, new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ()));
+            } else {
+                ((BlockDayNightLight) world.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ())).getBlock()).setState(false, world, new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ()));
             }
         }
     }

@@ -15,12 +15,13 @@ public class BlockBase extends Block {
 
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
-        setCreativeTab(RealLifeAdaptation.BLOCK_TAB);
+        if (!name.equals("orange_traffic_light_block") && !name.equals("red_traffic_light_block")) {
+            setCreativeTab(RealLifeAdaptation.BLOCK_TAB);
+        }
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
-    {
+    public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.SOLID;
     }
 }

@@ -1,8 +1,7 @@
 {
   "variants": {
-    "facing=north": { "model": "reallifeadaptation:lamp", "y": 180 },
-    "facing=south": { "model": "reallifeadaptation:lamp"},
-    "facing=west":  { "model": "reallifeadaptation:lamp", "y": 90 },
-    "facing=east":  { "model": "reallifeadaptation:lamp", "y": 270 }
+    "half=upper": { "model": "reallifeadaptation:lamp"},
+    "half=lower": { "model": "reallifeadaptation:lamp_bottom"},
+    "half=middle": { "model": "reallifeadaptation:lamp_middle"}
   }
 }

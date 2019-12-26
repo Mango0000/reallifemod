@@ -1,6 +1,8 @@
-package at.kaindorf.reallifeadaptation.blocks;
+package at.kaindorf.reallifeadaptation.Machines;
 
 import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
+import at.kaindorf.reallifeadaptation.blocks.BlockBase;
+import at.kaindorf.reallifeadaptation.proxy.CommonProxy;
 import at.kaindorf.reallifeadaptation.tileentity.TileEntityRafenerie;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -19,12 +21,13 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import javax.annotation.Nullable;
 
-public class BlockRafenerie extends BlockBase implements ITileEntityProvider{
+public class MachineRafenerie extends BlockBase implements ITileEntityProvider{
 
     public static final PropertyDirection FACING = PropertyDirection.create("facing");
-    public BlockRafenerie(String name, Material materialIn) {
+    public MachineRafenerie(String name, Material materialIn) {
         super(name, materialIn);
         setDefaultState(getDefaultState().withProperty(FACING, EnumFacing.UP));
+        setCreativeTab(RealLifeAdaptation.MACHINE_TAB);
         GameRegistry.registerTileEntity(TileEntityRafenerie.class, new ResourceLocation(RealLifeAdaptation.MODID,
                 "rafenerie_block"));
     }
