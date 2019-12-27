@@ -1,10 +1,7 @@
 package at.kaindorf.reallifeadaptation.proxy;
 
 
-import at.kaindorf.reallifeadaptation.Machines.MachineGeneratorUpgrade;
-import at.kaindorf.reallifeadaptation.Machines.MachineRafenerie;
-import at.kaindorf.reallifeadaptation.Machines.MachineSawmill;
-import at.kaindorf.reallifeadaptation.Machines.MachineGenerator;
+import at.kaindorf.reallifeadaptation.Machines.*;
 import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
 import at.kaindorf.reallifeadaptation.blocks.*;
 import at.kaindorf.reallifeadaptation.blocks.trees.*;
@@ -14,6 +11,7 @@ import at.kaindorf.reallifeadaptation.potions.BeerPotion;
 import at.kaindorf.reallifeadaptation.tileentity.TileEntityCustomFurnace;
 import at.kaindorf.reallifeadaptation.tileentity.TileEntityGenerator;
 import at.kaindorf.reallifeadaptation.tileentity.TileEntityGeneratorUpgrade;
+import at.kaindorf.reallifeadaptation.tileentity.TileEntityHochofen;
 import at.kaindorf.reallifeadaptation.util.handlers.GuiHandler;
 import at.kaindorf.reallifeadaptation.world.biomes.BiomeCopper;
 import com.google.gson.JsonObject;
@@ -84,12 +82,16 @@ public class CommonProxy {
     public static final Block CUSTOM_FURNACE = new MachineSawmill("custom_furnace");
     public static final Block GENERATOR = new MachineGenerator("generator");
     public static final Block GENERATOR_UPGRADE = new MachineGeneratorUpgrade("generator_upgrade");
+    public static final Item STEEL_INGOT = new ItemSteelIngot("steel_ingot");
+    //tileentity
     public static final TileEntity tileEntityGenerator = new TileEntityGenerator();
     public static final TileEntity tileEntityGeneratorupgrade = new TileEntityGeneratorUpgrade();
     public static final TileEntity te = new TileEntityCustomFurnace();
+    public static final TileEntity tileEntityHochofen = new TileEntityHochofen();
     public static final Item SAWMIL_BLADE = new ItemBlade("sawmil_blade", 4);
     public static final Block BLOCK_DOUBLE = new BlockStreetLightBlock(Material.ROCK, "street_light_block", false);
     public static final Block LIT_BLOCK_DOUBLE = new BlockStreetLightBlock(Material.ROCK, "lit_street_light_block", true);
+    public static final Block MACHINE_HOCHOFEN = new MachineHochofen("machine_hochofen");
     //tree
     public static final Block COPPER_DIRT = new BlockDirtBase("copper_dirt");
     public static final Block COPPER_LEAVES = new BlockLeavesBase("copper_leaves");
@@ -135,7 +137,7 @@ public class CommonProxy {
                 rafenerie_block, day_night_block, traffic_light_block, GENERATOR, CUSTOM_FURNACE, BLOCK_DOUBLE,
                 orange_traffic_light_lamp, red_traffic_light_lamp, COPPER_DIRT,COPPER_LEAVES, COPPER_LOG, COPPER_PLANK,
                 COPPER_SAPLING, COPPER_SAPLING, LIT_BLOCK_DOUBLE, lit_electricstreetlight, lit_day_night_block,
-                GENERATOR_UPGRADE);
+                GENERATOR_UPGRADE, MACHINE_HOCHOFEN);
     }
 
 
@@ -160,13 +162,14 @@ public class CommonProxy {
         event.getRegistry().registerAll(new ItemBlock(lit_electricstreetlight).setRegistryName(lit_electricstreetlight.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(lit_day_night_block).setRegistryName(lit_day_night_block.getRegistryName()));
         event.getRegistry().registerAll(new ItemBlock(GENERATOR_UPGRADE).setRegistryName(GENERATOR_UPGRADE.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(MACHINE_HOCHOFEN).setRegistryName(MACHINE_HOCHOFEN.getRegistryName()));
 
     }
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(fuelContainer, rubber, rubberbucket, oilbucket, SAWMIL_BLADE, RUBBER_BOOTS,
-                RUBBER_CHEST, RUBBER_HELMET, RUBBER_LEGGINGS);
+                RUBBER_CHEST, RUBBER_HELMET, RUBBER_LEGGINGS, STEEL_INGOT);
     }
 
     @SubscribeEvent
@@ -180,6 +183,7 @@ public class CommonProxy {
         registerRender(RUBBER_HELMET);
         registerRender(RUBBER_LEGGINGS);
         registerRender(SAWMIL_BLADE);
+        registerRender(STEEL_INGOT);
         registerRender(Item.getItemFromBlock(electricstreetlight));
         registerRender(Item.getItemFromBlock(compressedcoal));
         registerRender(Item.getItemFromBlock(rafenerie_block));
@@ -199,6 +203,7 @@ public class CommonProxy {
         registerRender(Item.getItemFromBlock(lit_electricstreetlight));
         registerRender(Item.getItemFromBlock(lit_day_night_block));
         registerRender(Item.getItemFromBlock(GENERATOR_UPGRADE));
+        registerRender(Item.getItemFromBlock(MACHINE_HOCHOFEN));
 
     }
 
@@ -224,6 +229,7 @@ public class CommonProxy {
         GameRegistry.registerTileEntity(TileEntityCustomFurnace.class, new ResourceLocation(RealLifeAdaptation.MODID + ":custom_furnace"));
         GameRegistry.registerTileEntity(TileEntityGenerator.class, new ResourceLocation(RealLifeAdaptation.MODID + ":generator"));
         GameRegistry.registerTileEntity(TileEntityGeneratorUpgrade.class, new ResourceLocation(RealLifeAdaptation.MODID + ":generator_upgrade"));
+        GameRegistry.registerTileEntity(TileEntityHochofen.class, new ResourceLocation(RealLifeAdaptation.MODID + ":machine_hochofen"));
     }
 
     private static void registerPotionMixes(){

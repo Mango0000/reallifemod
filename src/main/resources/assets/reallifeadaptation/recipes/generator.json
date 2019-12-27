@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "HHH",
+        "HOH",
+        "HHH"
+    ],
+    "key": {
+        "H": {
+            "item": "reallifeadaptation:steel_ingot"
+        },
+        "O": {
+            "item": "minecraft:furnace"
+        }
+    },
+    "result": {
+        "item": "reallifeadaptation:generator",
+        "count": 1
+    }
+}

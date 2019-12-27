@@ -1,0 +1,12 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "particle": "reallifeadaptation:blocks/generator_side",
+    "up": "reallifeadaptation:blocks/generator_side",
+    "down": "reallifeadaptation:blocks/generator_side",
+    "north": "reallifeadaptation:blocks/generator_side",
+    "east": "reallifeadaptation:blocks/generator_side",
+    "south": "reallifeadaptation:blocks/generator_front_off",
+    "west": "reallifeadaptation:blocks/generator_side"
+  }
+}

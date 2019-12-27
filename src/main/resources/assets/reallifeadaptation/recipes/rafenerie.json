@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " B ",
+        "RHR",
+        "HHH"
+    ],
+    "key": {
+        "R": {
+            "item": "minecraft:diamond"
+        },
+        "H": {
+            "item": "reallifeadaptation:steel_ingot"
+        },
+        "B": {
+            "item": "minecraft:bucket"
+        }
+    },
+    "result": {
+        "item": "reallifeadaptation:rafenerie_block",
+        "count": 1
+    }
+}

@@ -11,6 +11,7 @@ tile.generator.name=Generator
 tile.generator_upgrade.name=Generator Upgrade
 item.sawmil_blade.name=Sawmil Blade
 tile.double.name=double
+tile.machine_hochofen.name=Hochofen
 //Potions
 effect.beerpotion=Beer Potion
 potion.effect.beerpotion=Potion of Beer Potion

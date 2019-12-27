@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " C ",
+        "GGG",
+        "H H"
+    ],
+    "key": {
+        "C": {
+            "item": "reallifeadaptation:sawmil_blade"
+        },
+        "G": {
+            "item": "reallifeadaptation:steel_ingot"
+        },
+        "H": {
+            "item": "minecraft:stick"
+        }
+    },
+    "result": {
+        "item": "reallifeadaptation:custom_furnace",
+        "count": 1
+    }
+}
