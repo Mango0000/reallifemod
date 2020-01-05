@@ -2,6 +2,7 @@ tile.electric_street_light.name=Electric Light Block
 item.fuelcontainer.name=Fuel Container
 item.rubber.name=Rubber
 item.rubberbucket.name=Rubber Bucket
+item.f1.name=F1 Car
 tile.street_light_block.name=Street Light Block
 tile.compressedcoal.name=Compressed Coal
 tile.BlockRafenerie.name=Rafenerie

@@ -5,6 +5,9 @@ import at.kaindorf.reallifeadaptation.Machines.*;
 import at.kaindorf.reallifeadaptation.RealLifeAdaptation;
 import at.kaindorf.reallifeadaptation.blocks.*;
 import at.kaindorf.reallifeadaptation.blocks.trees.*;
+import at.kaindorf.reallifeadaptation.entity.EntityF1;
+import at.kaindorf.reallifeadaptation.handlers.RenderHandler;
+import at.kaindorf.reallifeadaptation.init.EntityInit;
 import at.kaindorf.reallifeadaptation.items.*;
 import at.kaindorf.reallifeadaptation.items.armor.ArmorBase;
 import at.kaindorf.reallifeadaptation.potions.BeerPotion;
@@ -106,8 +109,10 @@ public class CommonProxy {
     public static final Item RUBBER_CHEST = new ArmorBase("rubber_chestplate", ARMOR_MATERIAL_RUBBER, 1, EntityEquipmentSlot.CHEST);
     public static final Item RUBBER_LEGGINGS = new ArmorBase("rubber_leggings", ARMOR_MATERIAL_RUBBER, 2, EntityEquipmentSlot.LEGS);
     public static final Item RUBBER_BOOTS = new ArmorBase("rubber_boots",ARMOR_MATERIAL_RUBBER, 1, EntityEquipmentSlot.FEET);
+    public static final Item f1 = new ItemF1(EntityF1.Type.BIRCH,"f1");
     public void preInit(FMLPreInitializationEvent e) {
-
+        EntityInit.registerEntities();
+        RenderHandler.registerEntityRenders();
     }
 
     public void init(FMLInitializationEvent e) {
@@ -169,7 +174,7 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(fuelContainer, rubber, rubberbucket, oilbucket, SAWMIL_BLADE, RUBBER_BOOTS,
-                RUBBER_CHEST, RUBBER_HELMET, RUBBER_LEGGINGS, STEEL_INGOT);
+                RUBBER_CHEST, RUBBER_HELMET, RUBBER_LEGGINGS, STEEL_INGOT, f1);
     }
 
     @SubscribeEvent
@@ -184,6 +189,7 @@ public class CommonProxy {
         registerRender(RUBBER_LEGGINGS);
         registerRender(SAWMIL_BLADE);
         registerRender(STEEL_INGOT);
+        registerRender(f1);
         registerRender(Item.getItemFromBlock(electricstreetlight));
         registerRender(Item.getItemFromBlock(compressedcoal));
         registerRender(Item.getItemFromBlock(rafenerie_block));
