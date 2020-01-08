@@ -1,10 +1,10 @@
 {
   "variants": {
-    "facing=north": { "model": "reallifeadaptation:traffic_light_block" },
-    "facing=east": { "model": "reallifeadaptation:traffic_light_block", "y": 90 },
-    "facing=south": { "model": "reallifeadaptation:traffic_light_block", "y": 180 },
-    "facing=west": { "model": "reallifeadaptation:traffic_light_block", "y": 270 },
-    "facing=down": { "model": "reallifeadaptation:traffic_light_block"},
-    "facing=up": { "model": "reallifeadaptation:traffic_light_block"}
+    "facing=north": { "model": "reallifeadaptation:ample" },
+    "facing=east": { "model": "reallifeadaptation:ample", "y": 90 },
+    "facing=south": { "model": "reallifeadaptation:ample", "y": 180 },
+    "facing=west": { "model": "reallifeadaptation:ample", "y": 270 },
+    "facing=down": { "model": "reallifeadaptation:ample"},
+    "facing=up": { "model": "reallifeadaptation:ample"}
   }
 }
