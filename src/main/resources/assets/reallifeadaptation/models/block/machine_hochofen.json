@@ -6,7 +6,7 @@
     "down": "reallifeadaptation:blocks/generator_side",
     "north": "reallifeadaptation:blocks/generator_side",
     "east": "reallifeadaptation:blocks/generator_side",
-    "south": "reallifeadaptation:blocks/generator_front_off",
+    "south": "reallifeadaptation:blocks/hochofen",
     "west": "reallifeadaptation:blocks/generator_side"
   }
 }

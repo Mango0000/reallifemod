@@ -110,6 +110,7 @@ public class CommonProxy {
     public static final Item RUBBER_LEGGINGS = new ArmorBase("rubber_leggings", ARMOR_MATERIAL_RUBBER, 2, EntityEquipmentSlot.LEGS);
     public static final Item RUBBER_BOOTS = new ArmorBase("rubber_boots",ARMOR_MATERIAL_RUBBER, 1, EntityEquipmentSlot.FEET);
     public static final Item f1 = new ItemF1(EntityF1.Type.BIRCH,"f1");
+    public static final Item f2 = new ItemF1(EntityF1.Type.BIRCH,"f2");
     public void preInit(FMLPreInitializationEvent e) {
         EntityInit.registerEntities();
         RenderHandler.registerEntityRenders();
@@ -174,7 +175,7 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(fuelContainer, rubber, rubberbucket, oilbucket, SAWMIL_BLADE, RUBBER_BOOTS,
-                RUBBER_CHEST, RUBBER_HELMET, RUBBER_LEGGINGS, STEEL_INGOT, f1);
+                RUBBER_CHEST, RUBBER_HELMET, RUBBER_LEGGINGS, STEEL_INGOT, f1, f2);
     }
 
     @SubscribeEvent
@@ -190,6 +191,7 @@ public class CommonProxy {
         registerRender(SAWMIL_BLADE);
         registerRender(STEEL_INGOT);
         registerRender(f1);
+        registerRender(f2);
         registerRender(Item.getItemFromBlock(electricstreetlight));
         registerRender(Item.getItemFromBlock(compressedcoal));
         registerRender(Item.getItemFromBlock(rafenerie_block));

@@ -1,6 +1,6 @@
 {
   "variants": {
-    "half=upper": { "model": "reallifeadaptation:copper_dirt"},
+    "half=upper": { "model": "reallifeadaptation:litlamp"},
     "half=lower": { "model": "reallifeadaptation:lamp_bottom"},
     "half=middle": { "model": "reallifeadaptation:lamp_middle"}
   }

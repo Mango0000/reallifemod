@@ -6,8 +6,6 @@ import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -40,13 +38,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class EntityF1 extends Entity
+public class EntityF2 extends Entity
 {
-    private static final DataParameter<Integer> TIME_SINCE_HIT = EntityDataManager.<Integer>createKey(EntityF1.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> FORWARD_DIRECTION = EntityDataManager.<Integer>createKey(EntityF1.class, DataSerializers.VARINT);
-    private static final DataParameter<Float> DAMAGE_TAKEN = EntityDataManager.<Float>createKey(EntityF1.class, DataSerializers.FLOAT);
-    private static final DataParameter<Integer> BOAT_TYPE = EntityDataManager.<Integer>createKey(EntityF1.class, DataSerializers.VARINT);
-    private static final DataParameter<Boolean>[] DATA_ID_PADDLE = new DataParameter[] {EntityDataManager.createKey(EntityF1.class, DataSerializers.BOOLEAN), EntityDataManager.createKey(EntityF1.class, DataSerializers.BOOLEAN)};
+    private static final DataParameter<Integer> TIME_SINCE_HIT = EntityDataManager.<Integer>createKey(EntityF2.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> FORWARD_DIRECTION = EntityDataManager.<Integer>createKey(EntityF2.class, DataSerializers.VARINT);
+    private static final DataParameter<Float> DAMAGE_TAKEN = EntityDataManager.<Float>createKey(EntityF2.class, DataSerializers.FLOAT);
+    private static final DataParameter<Integer> BOAT_TYPE = EntityDataManager.<Integer>createKey(EntityF2.class, DataSerializers.VARINT);
+    private static final DataParameter<Boolean>[] DATA_ID_PADDLE = new DataParameter[] {EntityDataManager.createKey(EntityF2.class, DataSerializers.BOOLEAN), EntityDataManager.createKey(EntityF2.class, DataSerializers.BOOLEAN)};
     private final float[] paddlePositions;
     /** How much of current speed to retain. Value zero to one. */
     private float momentum;
@@ -63,16 +61,17 @@ public class EntityF1 extends Entity
     private static boolean forwardInputDown;
     private static boolean backInputDown;
     private double waterLevel;
+
     /**
      * How much the boat should glide given the slippery blocks it's currently gliding over.
      * Halved every tick.
      */
     private float boatGlide;
-    private EntityF1.Status status;
-    private EntityF1.Status previousStatus;
+    private EntityF2.Status status;
+    private EntityF2.Status previousStatus;
     private double lastYd;
 
-    public EntityF1(World worldIn)
+    public EntityF2(World worldIn)
     {
         super(worldIn);
         this.paddlePositions = new float[2];
@@ -80,7 +79,7 @@ public class EntityF1 extends Entity
         this.setSize(1.375F, 0.5625F);
     }
 
-    public EntityF1(World worldIn, double x, double y, double z)
+    public EntityF2(World worldIn, double x, double y, double z)
     {
         this(worldIn);
         this.setPosition(x, y, z);
@@ -106,7 +105,7 @@ public class EntityF1 extends Entity
         this.dataManager.register(TIME_SINCE_HIT, Integer.valueOf(0));
         this.dataManager.register(FORWARD_DIRECTION, Integer.valueOf(1));
         this.dataManager.register(DAMAGE_TAKEN, Float.valueOf(0.0F));
-        this.dataManager.register(BOAT_TYPE, Integer.valueOf(EntityF1.Type.OAK.ordinal()));
+        this.dataManager.register(BOAT_TYPE, Integer.valueOf(EntityF2.Type.OAK.ordinal()));
 
         for (DataParameter<Boolean> dataparameter : DATA_ID_PADDLE)
         {
@@ -201,7 +200,7 @@ public class EntityF1 extends Entity
      */
     public void applyEntityCollision(Entity entityIn)
     {
-        if (entityIn instanceof EntityF1)
+        if (entityIn instanceof EntityF2)
         {
             if (entityIn.getEntityBoundingBox().minY < this.getEntityBoundingBox().maxY)
             {
@@ -284,7 +283,7 @@ public class EntityF1 extends Entity
         this.previousStatus = this.status;
         this.status = this.getBoatStatus();
 
-        if (this.status != EntityF1.Status.UNDER_WATER && this.status != EntityF1.Status.UNDER_FLOWING_WATER)
+        if (this.status != EntityF2.Status.UNDER_WATER && this.status != EntityF2.Status.UNDER_FLOWING_WATER)
         {
             this.outOfControlTicks = 0.0F;
         }
@@ -437,9 +436,9 @@ public class EntityF1 extends Entity
     /**
      * Determines whether the boat is in water, gliding on land, or in air
      */
-    private EntityF1.Status getBoatStatus()
+    private EntityF2.Status getBoatStatus()
     {
-        EntityF1.Status entityboat$status = this.getUnderwaterStatus();
+        EntityF2.Status entityboat$status = this.getUnderwaterStatus();
 
         if (entityboat$status != null)
         {
@@ -448,7 +447,7 @@ public class EntityF1 extends Entity
         }
         else if (this.checkInWater())
         {
-            return EntityF1.Status.IN_WATER;
+            return EntityF2.Status.IN_WATER;
         }
         else
         {
@@ -457,11 +456,11 @@ public class EntityF1 extends Entity
             if (f > 0.0F)
             {
                 this.boatGlide = f;
-                return EntityF1.Status.ON_LAND;
+                return EntityF2.Status.ON_LAND;
             }
             else
             {
-                return EntityF1.Status.IN_AIR;
+                return EntityF2.Status.IN_AIR;
             }
         }
     }
@@ -631,7 +630,7 @@ public class EntityF1 extends Entity
      * Decides whether the boat is currently underwater.
      */
     @Nullable
-    private EntityF1.Status getUnderwaterStatus()
+    private EntityF2.Status getUnderwaterStatus()
     {
         AxisAlignedBB axisalignedbb = this.getEntityBoundingBox();
         double d0 = axisalignedbb.maxY + 0.001D;
@@ -659,7 +658,7 @@ public class EntityF1 extends Entity
                         {
                             if (((Integer)iblockstate.getValue(BlockLiquid.LEVEL)).intValue() != 0)
                             {
-                                EntityF1.Status entityboat$status = EntityF1.Status.UNDER_FLOWING_WATER;
+                                EntityF2.Status entityboat$status = EntityF2.Status.UNDER_FLOWING_WATER;
                                 return entityboat$status;
                             }
 
@@ -674,7 +673,7 @@ public class EntityF1 extends Entity
             blockpos$pooledmutableblockpos.release();
         }
 
-        return flag ? EntityF1.Status.UNDER_WATER : null;
+        return flag ? EntityF2.Status.UNDER_WATER : null;
     }
 
     /**
@@ -687,36 +686,36 @@ public class EntityF1 extends Entity
         double d2 = 0.0D;
         this.momentum = 0.05F;
 
-        if (this.previousStatus == EntityF1.Status.IN_AIR && this.status != EntityF1.Status.IN_AIR && this.status != EntityF1.Status.ON_LAND)
+        if (this.previousStatus == EntityF2.Status.IN_AIR && this.status != EntityF2.Status.IN_AIR && this.status != EntityF2.Status.ON_LAND)
         {
             this.waterLevel = this.getEntityBoundingBox().minY + (double)this.height;
             this.setPosition(this.posX, (double)(this.getWaterLevelAbove() - this.height) + 0.101D, this.posZ);
             this.motionY = 0.0D;
             this.lastYd = 0.0D;
-            this.status = EntityF1.Status.IN_WATER;
+            this.status = EntityF2.Status.IN_WATER;
         }
         else
         {
-            if (this.status == EntityF1.Status.IN_WATER)
+            if (this.status == EntityF2.Status.IN_WATER)
             {
                 d2 = (this.waterLevel - this.getEntityBoundingBox().minY) / (double)this.height;
                 this.momentum = 0.9F;
             }
-            else if (this.status == EntityF1.Status.UNDER_FLOWING_WATER)
+            else if (this.status == EntityF2.Status.UNDER_FLOWING_WATER)
             {
                 d1 = -7.0E-4D;
                 this.momentum = 0.9F;
             }
-            else if (this.status == EntityF1.Status.UNDER_WATER)
+            else if (this.status == EntityF2.Status.UNDER_WATER)
             {
                 d2 = 0.009999999776482582D;
                 this.momentum = 0.45F;
             }
-            else if (this.status == EntityF1.Status.IN_AIR)
+            else if (this.status == EntityF2.Status.IN_AIR)
             {
                 this.momentum = 0.9F;
             }
-            else if (this.status == EntityF1.Status.ON_LAND)
+            else if (this.status == EntityF2.Status.ON_LAND)
             {
                 this.momentum = 0.99F;
 
@@ -742,43 +741,53 @@ public class EntityF1 extends Entity
     }
     @SideOnly(Side.CLIENT)
     @SubscribeEvent(priority= EventPriority.HIGHEST, receiveCanceled=true)
+    public void keyhandler(){
+        KeyBinding[] keyBindings = ClientProxy.keyBindings;
+        leftInputDown = keyBindings[2].isKeyDown();
+        rightInputDown = keyBindings[3].isKeyDown();
+        forwardInputDown = keyBindings[0].isKeyDown();
+        backInputDown = keyBindings[1].isKeyDown();
+    }
+
+    //@SideOnly(Side.CLIENT)
+    //@SubscribeEvent(priority= EventPriority.HIGHEST, receiveCanceled=true)
     public void controlBoat()
     {
-        KeyBinding[] keyBindings = ClientProxy.keyBindings;
+
         if (this.isBeingRidden())
         {
             float f = 0.0F;
 
-            if (keyBindings[2].isPressed())
+            if (leftInputDown)
             {
                 this.deltaRotation += -1.0F;
             }
 
-            if (keyBindings[3].isPressed())
+            if (rightInputDown)
             {
                 ++this.deltaRotation;
             }
 
-            if (keyBindings[3].isPressed() != keyBindings[2].isPressed() && !keyBindings[0].isPressed() && !keyBindings[1].isPressed())
+            if (rightInputDown != leftInputDown && !forwardInputDown && !backInputDown)
             {
                 f += 0.005F;
             }
 
             this.rotationYaw += this.deltaRotation;
 
-            if (keyBindings[0].isPressed())
+            if (forwardInputDown)
             {
                 f += 0.04F;
             }
 
-            if (keyBindings[1].isPressed())
+            if (backInputDown)
             {
                 f -= 0.005F;
             }
 
             this.motionX += (double)(MathHelper.sin(-this.rotationYaw * 0.017453292F) * f);
             this.motionZ += (double)(MathHelper.cos(this.rotationYaw * 0.017453292F) * f);
-            this.setPaddleState(keyBindings[3].isPressed() && !keyBindings[2].isPressed() || keyBindings[0].isPressed(), keyBindings[2].isPressed() && !keyBindings[3].isPressed() || keyBindings[0].isPressed());
+            this.setPaddleState(rightInputDown && !leftInputDown || forwardInputDown, leftInputDown && !backInputDown || forwardInputDown);
         }
     }
 
@@ -860,7 +869,7 @@ public class EntityF1 extends Entity
     {
         if (compound.hasKey("Type", 8))
         {
-            this.setBoatType(EntityF1.Type.getTypeFromString(compound.getString("Type")));
+            this.setBoatType(EntityF2.Type.getTypeFromString(compound.getString("Type")));
         }
     }
 
@@ -891,7 +900,7 @@ public class EntityF1 extends Entity
             {
                 if (this.fallDistance > 3.0F)
                 {
-                    if (this.status != EntityF1.Status.ON_LAND)
+                    if (this.status != EntityF2.Status.ON_LAND)
                     {
                         this.fallDistance = 0.0F;
                         return;
@@ -980,14 +989,14 @@ public class EntityF1 extends Entity
         return ((Integer)this.dataManager.get(FORWARD_DIRECTION)).intValue();
     }
 
-    public void setBoatType(EntityF1.Type boatType)
+    public void setBoatType(EntityF2.Type boatType)
     {
         this.dataManager.set(BOAT_TYPE, Integer.valueOf(boatType.ordinal()));
     }
 
-    public EntityF1.Type getBoatType()
+    public EntityF2.Type getBoatType()
     {
-        return EntityF1.Type.byId(((Integer)this.dataManager.get(BOAT_TYPE)).intValue());
+        return EntityF2.Type.byId(((Integer)this.dataManager.get(BOAT_TYPE)).intValue());
     }
 
     protected boolean canFitPassenger(Entity passenger)
@@ -1110,7 +1119,7 @@ public class EntityF1 extends Entity
         /**
          * Get a boat type by it's enum ordinal
          */
-        public static EntityF1.Type byId(int id)
+        public static EntityF2.Type byId(int id)
         {
             if (id < 0 || id >= values().length)
             {
@@ -1120,7 +1129,7 @@ public class EntityF1 extends Entity
             return values()[id];
         }
 
-        public static EntityF1.Type getTypeFromString(String nameIn)
+        public static EntityF2.Type getTypeFromString(String nameIn)
         {
             for (int i = 0; i < values().length; ++i)
             {

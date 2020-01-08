@@ -3,6 +3,7 @@ item.fuelcontainer.name=Fuel Container
 item.rubber.name=Rubber
 item.rubberbucket.name=Rubber Bucket
 item.f1.name=F1 Car
+item.f2.name=F2 Car
 tile.street_light_block.name=Street Light Block
 tile.compressedcoal.name=Compressed Coal
 tile.BlockRafenerie.name=Rafenerie
