@@ -32,9 +32,9 @@ public class TileEntityTrafficLight extends TileEntity implements ITickable {
         if (world.isRemote) {
             return;
         }
-        if(!RedsonteUtil.isPowered(world, pos)){
-            return;
-        }
+  //      if(!RedsonteUtil.isPowered(world, pos)){
+    //        return;
+      //  }
         if(world.getBlockState(pos) ==
                 CommonProxy.traffic_light_block.getDefaultState()){
 
